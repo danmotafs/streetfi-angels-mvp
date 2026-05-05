@@ -78,7 +78,8 @@ export default function HomePage() {
 
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {merchants.map((merchant) => (
-            <div
+            <a
+              href={`/merchant/${merchant.id}`}
               key={merchant.id}
               className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900 transition hover:-translate-y-1 hover:border-purple-500/40"
             >
@@ -121,10 +122,10 @@ export default function HomePage() {
                   </button>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
-      </main>
+    </main>
   );
 }
