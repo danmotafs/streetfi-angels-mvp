@@ -3,18 +3,18 @@ import Link from "next/link";
 const merchants = [
   {
     id: 1,
-    name: "Leo do Geladinho",
+    name: "Léo do Barbalho",
     city: "Salvador, Brazil",
     category: "Street Vendor",
     supporters: 124,
     image: "/images/leo-real.jpg",
     avatar: "/images/leo-avatar-1.png",
     story:
-      "Leo sells frozen treats in the streets of Salvador and supports his family through informal entrepreneurship.",
+      "Léo sells frozen treats in the streets of Salvador and supports his family through informal entrepreneurship.",
   },
   {
     id: 2,
-    name: "Leo Digital Twin",
+    name: "Léo Digital Twin",
     city: "StreetFi AI Profile",
     category: "AI Identity",
     supporters: 89,
@@ -27,20 +27,19 @@ const merchants = [
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-black text-white overflow-hidden">
-      {/* BACKGROUND GLOW */}
+    <main className="min-h-screen overflow-hidden bg-black text-white">
+      {/* Glow */}
       <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-3xl" />
 
       {/* HERO */}
-      <section className="relative mx-auto flex max-w-7xl flex-col items-center px-6 pb-24 pt-20 text-center">
-        {/* LOGO */}
+      <section className="relative mx-auto flex max-w-7xl flex-col items-center px-6 pb-20 pt-16 text-center">
         <img
           src="/images/logo.png"
           alt="StreetFi Angels"
-          className="mb-8 w-56"
+          className="mb-6 w-56"
         />
 
-        <p className="mb-5 text-sm uppercase tracking-[0.4em] text-yellow-400">
+        <p className="mb-4 text-sm uppercase tracking-[0.4em] text-yellow-400">
           Tokenizing Brazil’s Informal Economy
         </p>
 
@@ -55,7 +54,6 @@ export default function HomePage() {
           investment profiles powered by AI, SocialFi and Solana.
         </p>
 
-        {/* CTA */}
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <button className="rounded-2xl bg-yellow-400 px-8 py-4 font-bold text-black transition hover:scale-105">
             Explore Merchants
@@ -66,21 +64,20 @@ export default function HomePage() {
           </button>
         </div>
 
-        {/* TOKEN IMAGE */}
-        <div className="relative mt-20">
+        <div className="relative mt-16">
           <div className="absolute inset-0 rounded-full bg-yellow-500/20 blur-3xl" />
 
           <img
             src="/images/token.png"
             alt="StreetFi Token"
-            className="relative mx-auto w-[340px] animate-pulse"
+            className="relative mx-auto w-[300px]"
           />
         </div>
       </section>
 
       {/* MERCHANTS */}
       <section className="mx-auto max-w-7xl px-6 pb-32">
-        <div className="mb-16">
+        <div className="mb-14">
           <p className="mb-3 text-sm uppercase tracking-[0.4em] text-yellow-400">
             Featured Merchants
           </p>
@@ -97,14 +94,14 @@ export default function HomePage() {
             <Link key={merchant.id} href={`/merchant/${merchant.id}`}>
               <div className="group overflow-hidden rounded-[32px] border border-yellow-500/10 bg-zinc-900 transition duration-300 hover:-translate-y-2 hover:border-yellow-400/40">
                 {/* IMAGE */}
-                <div className="relative h-[420px] overflow-hidden">
+                <div className="relative h-[500px] overflow-hidden bg-black">
                   <img
                     src={merchant.image}
                     alt={merchant.name}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    className="h-full w-full object-contain transition duration-500 group-hover:scale-105"
                   />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
 
                   {/* AVATAR */}
                   <div className="absolute right-5 top-5">
