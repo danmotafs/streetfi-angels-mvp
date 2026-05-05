@@ -1,4 +1,4 @@
-fetch('data/merchants.json')
+fetch('./data/merchants.json')
   .then(response => response.json())
   .then(data => {
     const body = document.body;
