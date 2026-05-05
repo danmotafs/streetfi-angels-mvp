@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "João's Street Food",
+    "location": "Salvador, Brazil",
+    "category": "Food Vendor",
+    "description": "Local street food vendor specializing in traditional snacks.",
+    "supporters": 12,
+    "tokens": 340
+  },
+  {
+    "id": 2,
+    "name": "Maria's Handmade Crafts",
+    "location": "Rio de Janeiro, Brazil",
+    "category": "Crafts",
+    "description": "Handmade accessories inspired by Brazilian culture.",
+    "supporters": 8,
+    "tokens": 210
+  }
+]
