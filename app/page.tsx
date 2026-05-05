@@ -125,9 +125,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-      <div className="bg-red-500 p-10 text-5xl">
-  TESTE MERCHANT FEED
-</div>
-    </main>
+      </main>
   );
 }
