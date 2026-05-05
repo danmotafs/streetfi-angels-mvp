@@ -1,0 +1,34 @@
+{
+  "name": "streetfi-angels-mvp",
+  "version": "1.0.0",
+  "description": "StreetFi Angels is a SocialFi platform that enables anyone to support and invest in the local informal economy by transforming real-world merchants into investable digital profiles.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danmotafs/streetfi-angels-mvp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/danmotafs/streetfi-angels-mvp/issues"
+  },
+  "homepage": "https://github.com/danmotafs/streetfi-angels-mvp#readme",
+  "dependencies": {
+    "next": "^16.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^6.0.3"
+  }
+}
