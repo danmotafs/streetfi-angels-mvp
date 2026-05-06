@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import ConnectWalletButton from "./components/ConnectWalletButton";
 
 export default function HomePage() {
   return (
@@ -19,7 +19,7 @@ export default function HomePage() {
           />
 
           <div className="flex items-center gap-4">
-            <WalletMultiButton />
+            <ConnectWalletButton />
 
             <Link
               href="/merchant/1"
@@ -50,9 +50,8 @@ export default function HomePage() {
               digital identities, NFTs and social media brands using Solana.
             </p>
 
-            {/* WALLET CTA */}
             <div className="mt-10">
-              <WalletMultiButton />
+              <ConnectWalletButton />
             </div>
           </div>
 
@@ -83,7 +82,6 @@ export default function HomePage() {
           </p>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {/* Merchant Photos */}
             <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
               <p className="mb-3 font-bold text-yellow-400">
                 Merchant Photos
@@ -96,7 +94,6 @@ export default function HomePage() {
               />
             </div>
 
-            {/* Product Photos */}
             <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
               <p className="mb-3 font-bold text-yellow-400">
                 Product Photos
@@ -109,7 +106,6 @@ export default function HomePage() {
               />
             </div>
 
-            {/* Audio */}
             <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
               <p className="mb-3 font-bold text-yellow-400">
                 Audio Notes
@@ -122,7 +118,6 @@ export default function HomePage() {
               />
             </div>
 
-            {/* Story */}
             <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
               <p className="mb-3 font-bold text-yellow-400">
                 Merchant Story
@@ -173,41 +168,6 @@ export default function HomePage() {
           >
             Generate AI Merchant Profile
           </Link>
-        </section>
-
-        {/* STEP 2 */}
-        <section className="mt-16 grid gap-8 md:grid-cols-4">
-          {[
-            [
-              "AI Avatars",
-              "Generate multiple digital versions of the merchant.",
-            ],
-            [
-              "NFT Collection",
-              "Create merchant NFTs tied to products and local culture.",
-            ],
-            [
-              "AI Slogan",
-              "Generate Instagram bios and brand messaging.",
-            ],
-            [
-              "AI Social Posts",
-              "Create posts, captions and hashtags automatically.",
-            ],
-          ].map(([title, text]) => (
-            <div
-              key={title}
-              className="rounded-3xl border border-yellow-500/10 bg-zinc-900 p-6"
-            >
-              <p className="text-xl font-black text-yellow-400">
-                {title}
-              </p>
-
-              <p className="mt-3 text-sm leading-relaxed text-zinc-400">
-                {text}
-              </p>
-            </div>
-          ))}
         </section>
       </section>
     </main>
