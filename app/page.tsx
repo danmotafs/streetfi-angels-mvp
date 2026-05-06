@@ -1,160 +1,103 @@
 import Link from "next/link";
 
-const merchants = [
-  {
-    id: 1,
-    name: "Léo do Barbalho",
-    city: "Salvador, Brazil",
-    category: "Street Vendor",
-    supporters: 124,
-    image: "/images/leo-real.jpg",
-    avatar: "/images/leo-avatar-1.png",
-    story:
-      "Léo sells frozen treats in the streets of Salvador and supports his family through informal entrepreneurship.",
-  },
-  {
-    id: 2,
-    name: "Léo Digital Twin",
-    city: "StreetFi AI Profile",
-    category: "AI Identity",
-    supporters: 89,
-    image: "/images/leo-avatar-2.png",
-    avatar: "/images/leo-avatar-2.png",
-    story:
-      "StreetFi transforms real informal workers into digital investable identities using AI and Solana.",
-  },
-];
-
 export default function HomePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-black text-white">
-      {/* Glow */}
-      <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-3xl" />
+      <section className="relative mx-auto max-w-7xl px-6 py-12">
+        <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-3xl" />
 
-      {/* HERO */}
-      <section className="relative mx-auto flex max-w-7xl flex-col items-center px-6 pb-20 pt-16 text-center">
-        <img
-          src="/images/logo.png"
-          alt="StreetFi Angels"
-          className="mb-6 w-56"
-        />
+        <header className="relative flex items-center justify-between">
+          <img src="/images/logo.png" alt="StreetFi Angels" className="w-40" />
 
-        <p className="mb-4 text-sm uppercase tracking-[0.4em] text-yellow-400">
-          Tokenizing Brazil’s Informal Economy
-        </p>
+          <Link
+            href="/merchant/1"
+            className="rounded-2xl border border-yellow-400/30 px-5 py-3 font-bold text-yellow-300 hover:bg-yellow-400/10"
+          >
+            View Demo Profile
+          </Link>
+        </header>
 
-        <h1 className="max-w-5xl text-5xl font-black leading-tight md:text-7xl">
-          Back Real People.
-          <br />
-          <span className="text-yellow-400">Onchain.</span>
-        </h1>
+        <section className="relative grid gap-12 py-20 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="mb-4 text-sm uppercase tracking-[0.4em] text-yellow-400">
+              StreetFi Creation Flow
+            </p>
 
-        <p className="mt-8 max-w-3xl text-lg leading-relaxed text-zinc-400 md:text-xl">
-          StreetFi Angels transforms street workers into digital
-          investment profiles powered by AI, SocialFi and Solana.
-        </p>
+            <h1 className="text-5xl font-black leading-tight md:text-7xl">
+              Turn a local merchant into a{" "}
+              <span className="text-yellow-400">digital asset.</span>
+            </h1>
 
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <button className="rounded-2xl bg-yellow-400 px-8 py-4 font-bold text-black transition hover:scale-105">
-            Explore Merchants
-          </button>
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-zinc-400">
+              Capture photos, voice notes and a short story from a real street
+              merchant. StreetFi Angels converts that raw material into an AI
+              identity, avatars, NFTs, slogans and social media content.
+            </p>
+          </div>
 
-          <button className="rounded-2xl border border-yellow-400/30 px-8 py-4 font-bold text-yellow-300 transition hover:bg-yellow-400/10">
-            Become an Angel Investor
-          </button>
-        </div>
+          <div className="relative">
+            <div className="absolute inset-0 rounded-full bg-yellow-500/20 blur-3xl" />
+            <img src="/images/token.png" alt="StreetFi Token" className="relative mx-auto w-[360px]" />
+          </div>
+        </section>
 
-        <div className="relative mt-16">
-          <div className="absolute inset-0 rounded-full bg-yellow-500/20 blur-3xl" />
-
-          <img
-            src="/images/token.png"
-            alt="StreetFi Token"
-            className="relative mx-auto w-[300px]"
-          />
-        </div>
-      </section>
-
-      {/* MERCHANTS */}
-      <section className="mx-auto max-w-7xl px-6 pb-32">
-        <div className="mb-14">
-          <p className="mb-3 text-sm uppercase tracking-[0.4em] text-yellow-400">
-            Featured Merchants
+        {/* STEP 1 */}
+        <section className="relative rounded-[36px] border border-yellow-500/20 bg-zinc-950 p-8">
+          <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
+            Step 1 — Raw Merchant Capture
           </p>
 
-          <h2 className="text-4xl font-black md:text-5xl">
-            Real Stories.
-            <br />
-            Real Impact.
+          <h2 className="mt-4 text-4xl font-black">
+            Upload the real-world merchant material
           </h2>
-        </div>
 
-        <div className="grid gap-10 md:grid-cols-2">
-          {merchants.map((merchant) => (
-            <Link key={merchant.id} href={`/merchant/${merchant.id}`}>
-              <div className="group overflow-hidden rounded-[32px] border border-yellow-500/10 bg-zinc-900 transition duration-300 hover:-translate-y-2 hover:border-yellow-400/40">
-                {/* IMAGE */}
-                <div className="relative h-[500px] overflow-hidden bg-black">
-                  <img
-                    src={merchant.image}
-                    alt={merchant.name}
-                    className="h-full w-full object-contain transition duration-500 group-hover:scale-105"
-                  />
+          <p className="mt-4 max-w-3xl text-zinc-400">
+            This is where an Angel captures the first layer of value: photos,
+            audio and a short human story about the merchant.
+          </p>
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
+              <p className="mb-3 font-bold text-yellow-400">Merchant Photos</p>
+              <input type="file" multiple className="w-full rounded-xl border border-white/10 bg-black p-3 text-sm" />
+            </div>
 
-                  {/* AVATAR */}
-                  <div className="absolute right-5 top-5">
-                    <img
-                      src={merchant.avatar}
-                      alt={merchant.name}
-                      className="h-20 w-20 rounded-full border-4 border-black shadow-2xl"
-                    />
-                  </div>
+            <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
+              <p className="mb-3 font-bold text-yellow-400">Audio Notes</p>
+              <input type="file" accept="audio/*" className="w-full rounded-xl border border-white/10 bg-black p-3 text-sm" />
+            </div>
 
-                  {/* CATEGORY */}
-                  <div className="absolute left-6 top-6 rounded-full bg-yellow-400 px-4 py-2 text-xs font-bold uppercase text-black">
-                    {merchant.category}
-                  </div>
+            <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
+              <p className="mb-3 font-bold text-yellow-400">Short Story</p>
+              <textarea
+                placeholder="Tell us who this merchant is, what they sell and why people should support them..."
+                className="h-32 w-full rounded-xl border border-white/10 bg-black p-3 text-sm text-white"
+              />
+            </div>
+          </div>
 
-                  {/* INFO */}
-                  <div className="absolute bottom-0 left-0 w-full p-8">
-                    <h3 className="text-4xl font-black">
-                      {merchant.name}
-                    </h3>
+          <Link
+            href="/merchant/1"
+            className="mt-8 inline-flex rounded-2xl bg-yellow-400 px-8 py-4 font-black text-black transition hover:scale-105"
+          >
+            Generate Merchant Profile
+          </Link>
+        </section>
 
-                    <p className="mt-2 text-zinc-300">
-                      {merchant.city}
-                    </p>
-                  </div>
-                </div>
-
-                {/* CONTENT */}
-                <div className="p-8">
-                  <p className="leading-relaxed text-zinc-300">
-                    {merchant.story}
-                  </p>
-
-                  <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
-                    <div>
-                      <p className="text-sm text-zinc-500">
-                        Community Supporters
-                      </p>
-
-                      <p className="text-3xl font-black text-yellow-400">
-                        {merchant.supporters}
-                      </p>
-                    </div>
-
-                    <button className="rounded-2xl bg-yellow-400 px-6 py-3 font-bold text-black transition hover:scale-105">
-                      Support
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </Link>
+        {/* STEP 2 */}
+        <section className="relative mt-16 grid gap-8 md:grid-cols-4">
+          {[
+            ["AI Avatar", "Convert real photos into digital characters."],
+            ["NFT Profile", "Mint the merchant identity as a collectible asset."],
+            ["Jingle / Slogan", "Create a memorable brand hook for social media."],
+            ["AI Posts", "Generate content for Instagram and community growth."],
+          ].map(([title, text]) => (
+            <div key={title} className="rounded-3xl border border-yellow-500/10 bg-zinc-900 p-6">
+              <p className="text-xl font-black text-yellow-400">{title}</p>
+              <p className="mt-3 text-sm leading-relaxed text-zinc-400">{text}</p>
+            </div>
           ))}
-        </div>
+        </section>
       </section>
     </main>
   );
