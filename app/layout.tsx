@@ -1,8 +1,12 @@
 import "./globals.css";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+import Providers from "./providers";
+
+export const metadata: Metadata = {
   title: "StreetFi Angels",
-  description: "SocialFi for real-world merchants",
+  description: "StreetFi Angels Solana MVP",
 };
 
 export default function RootLayout({
@@ -12,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
