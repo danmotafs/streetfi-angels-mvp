@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 export default function HomePage() {
   return (
@@ -14,12 +18,16 @@ export default function HomePage() {
             className="w-40"
           />
 
-          <Link
-            href="/merchant/1"
-            className="rounded-2xl border border-yellow-400/30 px-5 py-3 font-bold text-yellow-300 transition hover:bg-yellow-400/10"
-          >
-            View Demo Profile
-          </Link>
+          <div className="flex items-center gap-4">
+            <WalletMultiButton />
+
+            <Link
+              href="/merchant/1"
+              className="rounded-2xl border border-yellow-400/30 px-5 py-3 font-bold text-yellow-300 transition hover:bg-yellow-400/10"
+            >
+              View Demo Profile
+            </Link>
+          </div>
         </header>
 
         {/* HERO */}
@@ -41,6 +49,11 @@ export default function HomePage() {
               StreetFi Angels transforms local entrepreneurs into AI-powered
               digital identities, NFTs and social media brands using Solana.
             </p>
+
+            {/* WALLET CTA */}
+            <div className="mt-10">
+              <WalletMultiButton />
+            </div>
           </div>
 
           <div className="relative">
