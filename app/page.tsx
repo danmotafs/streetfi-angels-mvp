@@ -2,9 +2,28 @@
 
 import Link from "next/link";
 
-import ConnectWalletButton from "./components/ConnectWalletButton";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function HomePage() {
+  const {
+    connected,
+    publicKey,
+    connect,
+    disconnect,
+  } = useWallet();
+
+  async function handleWallet() {
+    try {
+      if (connected) {
+        await disconnect();
+      } else {
+        await connect();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <main className="min-h-screen overflow-hidden bg-black text-white">
       <section className="relative mx-auto max-w-7xl px-6 py-12">
@@ -19,7 +38,17 @@ export default function HomePage() {
           />
 
           <div className="flex items-center gap-4">
-            <ConnectWalletButton />
+            {/* WALLET BUTTON */}
+            <button
+              onClick={handleWallet}
+              className="rounded-2xl bg-yellow-400 px-5 py-3 font-black text-black transition hover:scale-105"
+            >
+              {connected
+                ? `${publicKey?.toString().slice(0, 4)}...${publicKey
+                    ?.toString()
+                    .slice(-4)}`
+                : "Connect Phantom"}
+            </button>
 
             <Link
               href="/merchant/1"
@@ -50,8 +79,16 @@ export default function HomePage() {
               digital identities, NFTs and social media brands using Solana.
             </p>
 
+            {/* SECOND BUTTON */}
             <div className="mt-10">
-              <ConnectWalletButton />
+              <button
+                onClick={handleWallet}
+                className="rounded-2xl bg-yellow-400 px-6 py-4 text-lg font-black text-black transition hover:scale-105"
+              >
+                {connected
+                  ? "Wallet Connected"
+                  : "Connect Phantom Wallet"}
+              </button>
             </div>
           </div>
 
@@ -82,6 +119,7 @@ export default function HomePage() {
           </p>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {/* Merchant Photos */}
             <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
               <p className="mb-3 font-bold text-yellow-400">
                 Merchant Photos
@@ -94,6 +132,7 @@ export default function HomePage() {
               />
             </div>
 
+            {/* Product Photos */}
             <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
               <p className="mb-3 font-bold text-yellow-400">
                 Product Photos
@@ -106,6 +145,7 @@ export default function HomePage() {
               />
             </div>
 
+            {/* Audio */}
             <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
               <p className="mb-3 font-bold text-yellow-400">
                 Audio Notes
@@ -118,6 +158,7 @@ export default function HomePage() {
               />
             </div>
 
+            {/* Story */}
             <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
               <p className="mb-3 font-bold text-yellow-400">
                 Merchant Story
