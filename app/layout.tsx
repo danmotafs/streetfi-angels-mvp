@@ -6,14 +6,14 @@ import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "StreetFi Angels",
-  description: "StreetFi Angels Solana MVP",
+  description: "StreetFi Angels MVP",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
       <body>
