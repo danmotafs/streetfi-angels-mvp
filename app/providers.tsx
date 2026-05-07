@@ -13,7 +13,7 @@ import {
 
 import {
   PhantomWalletAdapter,
-} from "@solana/wallet-adapter-wallets";
+} from "@solana/wallet-adapter-phantom";
 
 import { clusterApiUrl } from "@solana/web3.js";
 
