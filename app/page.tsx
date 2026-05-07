@@ -2,10 +2,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
-import {
-  WalletMultiButton,
-} from "@solana/wallet-adapter-react-ui";
+const WalletMultiButtonDynamic = dynamic(
+  async () =>
+    (
+      await import("@solana/wallet-adapter-react-ui")
+    ).WalletMultiButton,
+  {
+    ssr: false,
+  }
+);
 
 export default function HomePage() {
   return (
@@ -15,18 +22,15 @@ export default function HomePage() {
 
         {/* HEADER */}
         <header className="relative flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Image
-              src="/images/logo.png"
-              alt="StreetFi Angels"
-              width={90}
-              height={90}
-              className="rounded-xl"
-            />
-          </div>
+          <Image
+            src="/images/logo.png"
+            alt="StreetFi"
+            width={90}
+            height={90}
+          />
 
           <div className="flex items-center gap-4">
-            <WalletMultiButton />
+            <WalletMultiButtonDynamic />
 
             <Link
               href="/merchant/1"
@@ -64,7 +68,7 @@ export default function HomePage() {
             </p>
 
             <div className="mt-10">
-              <WalletMultiButton />
+              <WalletMultiButtonDynamic />
             </div>
           </div>
 
@@ -73,16 +77,16 @@ export default function HomePage() {
 
             <Image
               src="/images/NFT1.png"
-              alt="StreetFi NFT"
+              alt="NFT"
               width={420}
               height={420}
-              className="relative rounded-[32px] border border-yellow-500/20 shadow-2xl shadow-yellow-500/10"
+              className="relative rounded-[32px] border border-yellow-500/20"
             />
           </div>
         </div>
 
         {/* STEP 1 */}
-        <section className="relative mt-32 rounded-[36px] border border-yellow-500/20 bg-zinc-950/80 p-10 backdrop-blur">
+        <section className="relative mt-32 rounded-[36px] border border-yellow-500/20 bg-zinc-950/80 p-10">
           <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
             Step 1 — Raw Merchant Capture
           </p>
@@ -90,14 +94,6 @@ export default function HomePage() {
           <h2 className="mt-4 text-5xl font-black">
             Upload merchant data
           </h2>
-
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
-            Upload real-world merchant photos,
-            product images, audio interviews and
-            stories. This becomes the AI training
-            material used to create the merchant’s
-            digital identity and social assets.
-          </p>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             <div className="rounded-3xl border border-zinc-800 bg-black/40 p-6">
@@ -143,7 +139,6 @@ export default function HomePage() {
 
               <textarea
                 rows={6}
-                placeholder="Describe the merchant story..."
                 className="mt-4 w-full rounded-xl border border-zinc-700 bg-zinc-900 p-4"
               />
             </div>
@@ -163,26 +158,44 @@ export default function HomePage() {
               </h2>
             </div>
 
-            <button className="rounded-2xl bg-yellow-400 px-8 py-4 font-bold text-black transition hover:scale-105">
+            <button className="rounded-2xl bg-yellow-400 px-8 py-4 font-bold text-black">
               Run StreetFi AI Pipeline
             </button>
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-4">
             {[
-              "AI Avatar",
-              "NFT Collection",
-              "Instagram Posts",
-              "Jingle + Slogan",
+              {
+                title: "AI Avatar",
+                image: "/images/avatar-image.png",
+              },
+              {
+                title: "NFT Collection",
+                image: "/images/NFT2.png",
+              },
+              {
+                title: "Instagram Posts",
+                image: "/images/instagram-logo.png",
+              },
+              {
+                title: "Jingle + Slogan",
+                image: "/images/nota-musical.png",
+              },
             ].map((item) => (
               <div
-                key={item}
+                key={item.title}
                 className="rounded-3xl border border-yellow-500/20 bg-zinc-950 p-8"
               >
-                <div className="mb-6 h-14 w-14 rounded-2xl bg-yellow-400/10" />
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={60}
+                  height={60}
+                  className="mb-6 rounded-2xl"
+                />
 
                 <h3 className="text-2xl font-bold">
-                  {item}
+                  {item.title}
                 </h3>
 
                 <p className="mt-4 leading-relaxed text-zinc-400">
@@ -210,12 +223,13 @@ export default function HomePage() {
           <div className="mt-16 grid gap-10 lg:grid-cols-2">
             {/* REAL */}
             <div className="overflow-hidden rounded-[36px] border border-yellow-500/20 bg-zinc-950">
-              <div className="relative h-[500px]">
+              <div className="relative h-[500px] bg-black">
                 <Image
                   src="/images/leo-real.jpg"
-                  alt="Leo Real"
+                  alt="Leo"
                   fill
-                  className="object-cover"
+                  sizes="50vw"
+                  className="object-contain"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -236,16 +250,9 @@ export default function HomePage() {
               </div>
 
               <div className="p-8">
-                <p className="leading-relaxed text-zinc-400">
-                  Informal street vendor selling
-                  handmade popsicles in Salvador.
-                  StreetFi converts local stories into
-                  digital economic opportunities.
-                </p>
-
                 <Link
                   href="/merchant/1"
-                  className="mt-8 inline-flex rounded-2xl bg-yellow-400 px-6 py-4 font-bold text-black transition hover:scale-105"
+                  className="mt-8 inline-flex rounded-2xl bg-yellow-400 px-6 py-4 font-bold text-black"
                 >
                   View Merchant Profile
                 </Link>
@@ -254,12 +261,13 @@ export default function HomePage() {
 
             {/* AI */}
             <div className="overflow-hidden rounded-[36px] border border-yellow-500/20 bg-zinc-950">
-              <div className="relative h-[500px]">
+              <div className="relative h-[500px] bg-black">
                 <Image
                   src="/images/leo-avatar-2.png"
-                  alt="Leo AI"
+                  alt="Avatar"
                   fill
-                  className="object-cover"
+                  sizes="50vw"
+                  className="object-contain"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -272,23 +280,13 @@ export default function HomePage() {
                   <h3 className="text-5xl font-black">
                     Léo Virtual Brand
                   </h3>
-
-                  <p className="mt-4 text-lg text-zinc-300">
-                    AI-powered creator identity
-                  </p>
                 </div>
               </div>
 
               <div className="p-8">
-                <p className="leading-relaxed text-zinc-400">
-                  AI-generated avatars, NFT
-                  collections, slogans and Instagram
-                  content powered by Solana.
-                </p>
-
                 <Link
                   href="/merchant/1"
-                  className="mt-8 inline-flex rounded-2xl border border-yellow-500/30 px-6 py-4 font-bold text-yellow-400 transition hover:bg-yellow-400/10"
+                  className="mt-8 inline-flex rounded-2xl border border-yellow-500/30 px-6 py-4 font-bold text-yellow-400"
                 >
                   Explore AI Assets
                 </Link>
