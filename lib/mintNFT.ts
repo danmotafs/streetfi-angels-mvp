@@ -2,11 +2,12 @@ import {
   createUmi,
   generateSigner,
   percentAmount,
+  keypairIdentity,
 } from "@metaplex-foundation/umi";
 
 import {
-  createNft,
   mplTokenMetadata,
+  createNft,
 } from "@metaplex-foundation/mpl-token-metadata";
 
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
@@ -15,13 +16,15 @@ import { clusterApiUrl } from "@solana/web3.js";
 
 export async function mintMerchantNft(wallet: any) {
   try {
-    const umi = createUmi(clusterApiUrl("devnet"))
-      .use(mplTokenMetadata())
-      .use(walletAdapterIdentity(wallet));
+    const umi = createUmi(clusterApiUrl("devnet"));
+
+    umi.use(mplTokenMetadata());
+
+    umi.use(walletAdapterIdentity(wallet));
 
     const mint = generateSigner(umi);
 
-    const tx = await createNft(umi, {
+    const result = await createNft(umi, {
       mint,
       name: "StreetFi Angels - Léo do Picolé",
       symbol: "STFI",
@@ -31,7 +34,7 @@ export async function mintMerchantNft(wallet: any) {
 
     return {
       success: true,
-      signature: tx.signature,
+      signature: result.signature,
     };
   } catch (error) {
     console.error(error);
