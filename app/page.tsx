@@ -1,29 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
-import { useWallet } from "@solana/wallet-adapter-react";
+import {
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
 
 export default function HomePage() {
-  const {
-    connected,
-    publicKey,
-    connect,
-    disconnect,
-  } = useWallet();
-
-  async function handleWallet() {
-    try {
-      if (connected) {
-        await disconnect();
-      } else {
-        await connect();
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
   return (
     <main className="min-h-screen overflow-hidden bg-black text-white">
       <section className="relative mx-auto max-w-7xl px-6 py-12">
@@ -31,28 +15,22 @@ export default function HomePage() {
 
         {/* HEADER */}
         <header className="relative flex items-center justify-between">
-          <img
-            src="/images/logo.png"
-            alt="StreetFi Angels"
-            className="w-40"
-          />
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/logo.png"
+              alt="StreetFi Angels"
+              width={90}
+              height={90}
+              className="rounded-xl"
+            />
+          </div>
 
           <div className="flex items-center gap-4">
-            {/* WALLET BUTTON */}
-            <button
-              onClick={handleWallet}
-              className="rounded-2xl bg-yellow-400 px-5 py-3 font-black text-black transition hover:scale-105"
-            >
-              {connected
-                ? `${publicKey?.toString().slice(0, 4)}...${publicKey
-                    ?.toString()
-                    .slice(-4)}`
-                : "Connect Phantom"}
-            </button>
+            <WalletMultiButton />
 
             <Link
               href="/merchant/1"
-              className="rounded-2xl border border-yellow-400/30 px-5 py-3 font-bold text-yellow-300 transition hover:bg-yellow-400/10"
+              className="rounded-2xl border border-yellow-500/30 px-6 py-3 font-semibold text-yellow-400 transition hover:border-yellow-400 hover:bg-yellow-400/10"
             >
               View Demo Profile
             </Link>
@@ -60,155 +38,263 @@ export default function HomePage() {
         </header>
 
         {/* HERO */}
-        <section className="relative grid gap-12 py-20 lg:grid-cols-2 lg:items-center">
+        <div className="relative mt-24 grid items-center gap-16 lg:grid-cols-2">
           <div>
-            <p className="mb-4 text-sm uppercase tracking-[0.4em] text-yellow-400">
+            <p className="mb-6 text-sm uppercase tracking-[0.4em] text-yellow-400">
               StreetFi Creation Flow
             </p>
 
-            <h1 className="text-5xl font-black leading-tight md:text-7xl">
-              Turn a local merchant into a{" "}
+            <h1 className="max-w-3xl text-6xl font-black leading-none tracking-tight md:text-7xl">
+              Turn a local
+              <br />
+              merchant into
+              <br />
+              a{" "}
               <span className="text-yellow-400">
                 digital asset.
               </span>
             </h1>
 
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-zinc-400">
-              Capture photos, audio and stories from real-world merchants.
-              StreetFi Angels transforms local entrepreneurs into AI-powered
-              digital identities, NFTs and social media brands using Solana.
+            <p className="mt-10 max-w-xl text-xl leading-relaxed text-zinc-400">
+              Capture photos, audio and stories from
+              real-world merchants. StreetFi Angels
+              transforms local entrepreneurs into
+              AI-powered digital identities, NFTs and
+              social media brands using Solana.
             </p>
 
-            {/* SECOND BUTTON */}
             <div className="mt-10">
-              <button
-                onClick={handleWallet}
-                className="rounded-2xl bg-yellow-400 px-6 py-4 text-lg font-black text-black transition hover:scale-105"
-              >
-                {connected
-                  ? "Wallet Connected"
-                  : "Connect Phantom Wallet"}
-              </button>
+              <WalletMultiButton />
             </div>
           </div>
 
-          <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-yellow-500/20 blur-3xl" />
+          <div className="relative flex justify-center">
+            <div className="absolute h-96 w-96 rounded-full bg-yellow-500/20 blur-3xl" />
 
-            <img
+            <Image
               src="/images/NFT1.png"
               alt="StreetFi NFT"
-              className="relative mx-auto w-[380px]"
+              width={420}
+              height={420}
+              className="relative rounded-[32px] border border-yellow-500/20 shadow-2xl shadow-yellow-500/10"
             />
           </div>
-        </section>
+        </div>
 
         {/* STEP 1 */}
-        <section className="relative rounded-[36px] border border-yellow-500/20 bg-zinc-950 p-8">
+        <section className="relative mt-32 rounded-[36px] border border-yellow-500/20 bg-zinc-950/80 p-10 backdrop-blur">
           <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
             Step 1 — Raw Merchant Capture
           </p>
 
-          <h2 className="mt-4 text-4xl font-black">
+          <h2 className="mt-4 text-5xl font-black">
             Upload merchant data
           </h2>
 
-          <p className="mt-4 max-w-3xl text-zinc-400">
-            Capture real-world merchant material that will be transformed into
-            AI-generated assets and digital profiles.
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">
+            Upload real-world merchant photos,
+            product images, audio interviews and
+            stories. This becomes the AI training
+            material used to create the merchant’s
+            digital identity and social assets.
           </p>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {/* Merchant Photos */}
-            <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
-              <p className="mb-3 font-bold text-yellow-400">
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            <div className="rounded-3xl border border-zinc-800 bg-black/40 p-6">
+              <h3 className="text-xl font-bold">
                 Merchant Photos
-              </p>
+              </h3>
 
               <input
                 type="file"
                 multiple
-                className="w-full rounded-xl border border-white/10 bg-black p-3 text-sm"
+                className="mt-4 w-full rounded-xl border border-zinc-700 bg-zinc-900 p-4"
               />
             </div>
 
-            {/* Product Photos */}
-            <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
-              <p className="mb-3 font-bold text-yellow-400">
+            <div className="rounded-3xl border border-zinc-800 bg-black/40 p-6">
+              <h3 className="text-xl font-bold">
                 Product Photos
-              </p>
+              </h3>
 
               <input
                 type="file"
                 multiple
-                className="w-full rounded-xl border border-white/10 bg-black p-3 text-sm"
+                className="mt-4 w-full rounded-xl border border-zinc-700 bg-zinc-900 p-4"
               />
             </div>
 
-            {/* Audio */}
-            <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
-              <p className="mb-3 font-bold text-yellow-400">
-                Audio Notes
-              </p>
+            <div className="rounded-3xl border border-zinc-800 bg-black/40 p-6">
+              <h3 className="text-xl font-bold">
+                Audio Interview
+              </h3>
 
               <input
                 type="file"
-                accept="audio/*"
-                className="w-full rounded-xl border border-white/10 bg-black p-3 text-sm"
+                multiple
+                className="mt-4 w-full rounded-xl border border-zinc-700 bg-zinc-900 p-4"
               />
             </div>
 
-            {/* Story */}
-            <div className="rounded-3xl border border-white/10 bg-zinc-900 p-6">
-              <p className="mb-3 font-bold text-yellow-400">
+            <div className="rounded-3xl border border-zinc-800 bg-black/40 p-6">
+              <h3 className="text-xl font-bold">
                 Merchant Story
-              </p>
+              </h3>
 
               <textarea
-                placeholder="Describe who this merchant is and why they matter to the community..."
-                className="h-32 w-full rounded-xl border border-white/10 bg-black p-3 text-sm text-white"
+                rows={6}
+                placeholder="Describe the merchant story..."
+                className="mt-4 w-full rounded-xl border border-zinc-700 bg-zinc-900 p-4"
               />
             </div>
           </div>
+        </section>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <div className="rounded-3xl border border-yellow-500/20 bg-black p-6">
-              <p className="text-sm text-zinc-500">
-                Merchant Name
+        {/* STEP 2 */}
+        <section className="mt-24">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
+                Step 2 — AI Conversion Layer
               </p>
 
-              <p className="mt-2 text-2xl font-black">
-                Léo do Picolé
-              </p>
+              <h2 className="mt-4 text-5xl font-black">
+                Generate digital assets
+              </h2>
             </div>
 
-            <div className="rounded-3xl border border-yellow-500/20 bg-black p-6">
-              <p className="text-sm text-zinc-500">
-                Main Activity Area
-              </p>
-
-              <p className="mt-2 text-2xl font-black">
-                Barbalho
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-yellow-500/20 bg-black p-6">
-              <p className="text-sm text-zinc-500">
-                City
-              </p>
-
-              <p className="mt-2 text-2xl font-black">
-                Salvador / BA
-              </p>
-            </div>
+            <button className="rounded-2xl bg-yellow-400 px-8 py-4 font-bold text-black transition hover:scale-105">
+              Run StreetFi AI Pipeline
+            </button>
           </div>
 
-          <Link
-            href="/merchant/1"
-            className="mt-10 inline-flex rounded-2xl bg-yellow-400 px-8 py-4 font-black text-black transition hover:scale-105"
-          >
-            Generate AI Merchant Profile
-          </Link>
+          <div className="mt-12 grid gap-6 md:grid-cols-4">
+            {[
+              "AI Avatar",
+              "NFT Collection",
+              "Instagram Posts",
+              "Jingle + Slogan",
+            ].map((item) => (
+              <div
+                key={item}
+                className="rounded-3xl border border-yellow-500/20 bg-zinc-950 p-8"
+              >
+                <div className="mb-6 h-14 w-14 rounded-2xl bg-yellow-400/10" />
+
+                <h3 className="text-2xl font-bold">
+                  {item}
+                </h3>
+
+                <p className="mt-4 leading-relaxed text-zinc-400">
+                  AI-generated asset powered by
+                  merchant uploads and Solana
+                  identity infrastructure.
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* FEATURED */}
+        <section className="mt-32">
+          <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
+            Featured Merchant
+          </p>
+
+          <h2 className="mt-4 text-6xl font-black">
+            Real Stories.
+            <br />
+            Real Impact.
+          </h2>
+
+          <div className="mt-16 grid gap-10 lg:grid-cols-2">
+            {/* REAL */}
+            <div className="overflow-hidden rounded-[36px] border border-yellow-500/20 bg-zinc-950">
+              <div className="relative h-[500px]">
+                <Image
+                  src="/images/leo-real.jpg"
+                  alt="Leo Real"
+                  fill
+                  className="object-cover"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+
+                <div className="absolute bottom-0 p-8">
+                  <div className="mb-4 inline-flex rounded-full bg-yellow-400 px-4 py-2 text-sm font-bold text-black">
+                    REAL MERCHANT
+                  </div>
+
+                  <h3 className="text-5xl font-black">
+                    Léo do Picolé
+                  </h3>
+
+                  <p className="mt-4 text-lg text-zinc-300">
+                    Barbalho • Salvador/BA
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-8">
+                <p className="leading-relaxed text-zinc-400">
+                  Informal street vendor selling
+                  handmade popsicles in Salvador.
+                  StreetFi converts local stories into
+                  digital economic opportunities.
+                </p>
+
+                <Link
+                  href="/merchant/1"
+                  className="mt-8 inline-flex rounded-2xl bg-yellow-400 px-6 py-4 font-bold text-black transition hover:scale-105"
+                >
+                  View Merchant Profile
+                </Link>
+              </div>
+            </div>
+
+            {/* AI */}
+            <div className="overflow-hidden rounded-[36px] border border-yellow-500/20 bg-zinc-950">
+              <div className="relative h-[500px]">
+                <Image
+                  src="/images/leo-avatar-2.png"
+                  alt="Leo AI"
+                  fill
+                  className="object-cover"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+
+                <div className="absolute bottom-0 p-8">
+                  <div className="mb-4 inline-flex rounded-full bg-yellow-400 px-4 py-2 text-sm font-bold text-black">
+                    AI DIGITAL TWIN
+                  </div>
+
+                  <h3 className="text-5xl font-black">
+                    Léo Virtual Brand
+                  </h3>
+
+                  <p className="mt-4 text-lg text-zinc-300">
+                    AI-powered creator identity
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-8">
+                <p className="leading-relaxed text-zinc-400">
+                  AI-generated avatars, NFT
+                  collections, slogans and Instagram
+                  content powered by Solana.
+                </p>
+
+                <Link
+                  href="/merchant/1"
+                  className="mt-8 inline-flex rounded-2xl border border-yellow-500/30 px-6 py-4 font-bold text-yellow-400 transition hover:bg-yellow-400/10"
+                >
+                  Explore AI Assets
+                </Link>
+              </div>
+            </div>
+          </div>
         </section>
       </section>
     </main>
