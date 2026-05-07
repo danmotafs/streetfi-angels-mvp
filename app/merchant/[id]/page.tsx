@@ -1,3 +1,9 @@
+"use client";
+
+import { useState } from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { mintMerchantNft } from "../../../lib/mintNFT";
+
 const avatarImages = [
   "/images/leo-avatar-1.png",
   "/images/leo-avatar-2.png",
@@ -85,6 +91,39 @@ const posts = [
 ];
 
 export default function MerchantProfile() {
+  const { wallet, connected } = useWallet();
+
+  const [minting, setMinting] = useState(false);
+
+  const handleMint = async () => {
+    try {
+      if (!wallet || !connected) {
+        alert("Connect Phantom Wallet first");
+        return;
+      }
+
+      setMinting(true);
+
+      const result = await mintMerchantNft(wallet.adapter);
+
+      if (result.success) {
+        alert("NFT Minted Successfully!");
+
+        window.open(
+          `https://explorer.solana.com/tx/${result.signature}?cluster=devnet`,
+          "_blank"
+        );
+      } else {
+        alert("Mint Failed");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    } finally {
+      setMinting(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-black px-6 py-12 text-white">
       <div className="mx-auto max-w-7xl">
@@ -96,7 +135,7 @@ export default function MerchantProfile() {
         <section className="mt-8 grid gap-10 lg:grid-cols-2 lg:items-center">
           <div className="overflow-hidden rounded-[36px] border border-yellow-500/20 bg-zinc-900">
             <img
-              src="/images/leo-real.jpg"
+              src="/images/leo-real.png"
               alt="Léo do Picolé"
               className="h-[680px] w-full object-contain bg-black"
             />
@@ -127,12 +166,16 @@ export default function MerchantProfile() {
                 Support Merchant
               </button>
 
-              <button className="rounded-2xl border border-yellow-400/30 px-8 py-4 font-black text-yellow-300">
-                Mint NFT
+              <button
+                onClick={handleMint}
+                disabled={minting}
+                className="rounded-2xl border border-yellow-400/30 px-8 py-4 font-black text-yellow-300 hover:bg-yellow-400 hover:text-black transition-all"
+              >
+                {minting ? "Minting NFT..." : "Mint NFT"}
               </button>
             </div>
 
-            <div className="mt-10 grid gap-4 md:grid-cols-3">
+            <div className="mt-10 grid gap-4 md:grid-cols-4">
               <div className="rounded-3xl bg-zinc-900 p-5">
                 <p className="text-sm text-zinc-500">
                   Supporters
@@ -155,10 +198,20 @@ export default function MerchantProfile() {
 
               <div className="rounded-3xl bg-zinc-900 p-5">
                 <p className="text-sm text-zinc-500">
-                  Category
+                  Neighborhood
                 </p>
 
                 <p className="text-2xl font-black">
+                  Barbalho
+                </p>
+              </div>
+
+              <div className="rounded-3xl bg-zinc-900 p-5">
+                <p className="text-sm text-zinc-500">
+                  Category
+                </p>
+
+                <p className="text-2xl font-black leading-tight">
                   Popsicle Vendor
                 </p>
               </div>

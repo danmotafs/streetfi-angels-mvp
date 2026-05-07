@@ -1,0 +1,21 @@
+{
+  "name": "StreetFi Angels - Léo do Picolé",
+  "symbol": "STFI",
+  "description": "AI-powered merchant identity from Salvador, Brazil.",
+  "seller_fee_basis_points": 500,
+  "image": "https://raw.githubusercontent.com/danmotafs/streetfi-angels-mvp/main/public/images/leo-real.png",
+  "attributes": [
+    {
+      "trait_type": "City",
+      "value": "Salvador"
+    },
+    {
+      "trait_type": "Neighborhood",
+      "value": "Barbalho"
+    },
+    {
+      "trait_type": "Category",
+      "value": "Popsicle Vendor"
+    }
+  ]
+}

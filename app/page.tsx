@@ -225,7 +225,8 @@ export default function HomePage() {
             <div className="overflow-hidden rounded-[36px] border border-yellow-500/20 bg-zinc-950">
               <div className="relative h-[500px] bg-black">
                 <Image
-                  src="/images/leo-real.jpg"
+                  src="/images/leo-real.png"
+
                   alt="Leo"
                   fill
                   sizes="50vw"
