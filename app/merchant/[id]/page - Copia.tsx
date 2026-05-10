@@ -29,37 +29,19 @@ export default function MerchantProfile() {
             gap: "16px",
           }}
         >
-          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-            <button
-              onClick={() => router.back()}
-              style={{
-                background: "transparent",
-                border: "none",
-                color: "#d4af37",
-                cursor: "pointer",
-                fontWeight: 600,
-                fontSize: "16px",
-              }}
-            >
-              ← Back
-            </button>
-
-            <button
-              onClick={() => router.push("/")}
-              style={{
-                background: "transparent",
-                border: "1px solid rgba(255,255,255,0.2)",
-                color: "#fff",
-                padding: "10px 18px",
-                borderRadius: "12px",
-                cursor: "pointer",
-                fontWeight: 700,
-                fontSize: "14px",
-              }}
-            >
-              Home
-            </button>
-          </div>
+          <button
+            onClick={() => router.back()}
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "#d4af37",
+              cursor: "pointer",
+              fontWeight: 600,
+              fontSize: "16px",
+            }}
+          >
+            ← Back
+          </button>
 
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
             <button

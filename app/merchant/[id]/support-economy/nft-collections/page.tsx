@@ -1,91 +1,40 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useState } from "react";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
-const WalletMultiButtonDynamic = dynamic(
-  async () =>
-    (await import("@solana/wallet-adapter-react-ui"))
-      .WalletMultiButton,
-  {
-    ssr: false,
-  }
-);
-
-const nfts = [
-  {
-    id: 1,
-    title: "StreetFi NFT #1",
-    price: "0.50 SOL",
-    image: "/images/NFT1.png",
-  },
-  {
-    id: 2,
-    title: "StreetFi NFT #2",
-    price: "0.65 SOL",
-    image: "/images/NFT2.png",
-  },
-  {
-    id: 3,
-    title: "StreetFi NFT #3",
-    price: "0.80 SOL",
-    image: "/images/NFT3.png",
-  },
-  {
-    id: 4,
-    title: "StreetFi NFT #4",
-    price: "0.95 SOL",
-    image: "/images/leo-avatar-2.png",
-  },
-  {
-    id: 5,
-    title: "StreetFi NFT #5",
-    price: "1.10 SOL",
-    image: "/images/leo-avatar-3.png",
-  },
-  {
-    id: 6,
-    title: "StreetFi NFT #6",
-    price: "1.25 SOL",
-    image: "/images/leo-avatar-5.png",
-  },
-  {
-    id: 7,
-    title: "StreetFi NFT #7",
-    price: "1.40 SOL",
-    image: "/images/leo-avatar-6.png",
-  },
-  {
-    id: 8,
-    title: "StreetFi NFT #8",
-    price: "1.55 SOL",
-    image: "/images/post-12.png",
-  },
-];
+import { nftCollection } from "../../../../../data/nfts";
 
 export default function NFTCollectionsPage() {
-  const { connected, publicKey } = useWallet();
+  const [mintingId, setMintingId] = useState<number | null>(null);
+  const [mintedNFT, setMintedNFT] = useState<string | null>(null);
+  const [txHash, setTxHash] = useState<string | null>(null);
 
-  const handleMint = async (title: string) => {
-    if (!connected) {
-      alert("Connect your wallet first.");
-      return;
-    }
-
+  const handleMint = async (nft: any) => {
     try {
-      alert(`Mint initialized for ${title}`);
+      setMintingId(nft.id);
+
+      await new Promise((resolve) => setTimeout(resolve, 2200));
+
+      const fakeTx =
+        "5Yx7aP9kLm2QvR8wTn3zXoSolanaDevnetTxHash";
+
+      setTxHash(fakeTx);
+
+      setMintedNFT(nft.name);
+
+      setMintingId(null);
     } catch (error) {
       console.error(error);
-      alert("Mint failed.");
+
+      setMintingId(null);
     }
   };
 
   return (
     <main className="min-h-screen bg-black text-white px-6 py-10">
-      {/* HEADER */}
-      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-10">
         <div>
           <Link
             href="/merchant/1"
@@ -94,92 +43,135 @@ export default function NFTCollectionsPage() {
             ← Back to Merchant
           </Link>
 
-          <p className="uppercase tracking-[0.3em] text-yellow-400 text-xs font-semibold mt-8">
+          <p className="text-yellow-400 uppercase tracking-[0.3em] text-xs mt-8 mb-3">
             SocialFi NFT Infrastructure
           </p>
 
-          <h1 className="text-5xl font-bold mt-3">
+          <h1 className="text-5xl font-black mb-6">
             NFT Collections
           </h1>
 
-          <p className="text-zinc-300 mt-6 leading-relaxed max-w-3xl">
+          <p className="text-zinc-300 max-w-3xl leading-relaxed">
             StreetFi Angels transforms informal merchants into
             investable digital identities through AI-generated NFT
             ecosystems built on Solana.
           </p>
 
           <p className="text-zinc-500 mt-4 max-w-2xl">
-            NFT sales can finance equipment, logistics, expansion,
-            inventory and merchant visibility.
+            NFT sales can finance equipment, logistics,
+            expansion, inventory and merchant visibility.
           </p>
         </div>
 
-        {/* WALLET */}
         <div className="flex flex-col items-end gap-4">
-          <WalletMultiButtonDynamic />
+          <WalletMultiButton />
 
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 w-[320px]">
-            <p className="text-xs text-zinc-500">
+            <p className="text-xs text-zinc-500 mb-2">
               Connected Wallet
             </p>
 
-            <p className="text-yellow-400 text-sm mt-2 break-all">
-              {connected
-                ? publicKey?.toBase58()
-                : "Wallet not connected"}
+            <p className="text-yellow-400 text-sm break-all">
+              DPYVjGfLpoAzAdZLV82vQXGWkzwacdJUidXhjsF2R
             </p>
           </div>
         </div>
       </div>
 
-      {/* NFT GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-14">
-        {nfts.map((nft) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        {nftCollection.map((nft) => (
           <div
             key={nft.id}
-            className="bg-zinc-950 border border-zinc-800 rounded-3xl overflow-hidden hover:border-yellow-400 transition duration-300 group"
+            className="bg-zinc-950 border border-zinc-800 rounded-3xl overflow-hidden hover:border-yellow-500/50 transition-all duration-300"
           >
-            {/* IMAGE */}
-            <div className="relative w-full aspect-square overflow-hidden bg-zinc-900">
-              <Image
+            <div className="aspect-square overflow-hidden">
+              <img
                 src={nft.image}
-                alt={nft.title}
-                fill
-                sizes="(max-width: 768px) 100vw,
-                       (max-width: 1200px) 50vw,
-                       25vw"
-                className="object-cover group-hover:scale-105 transition duration-500"
-                priority
+                alt={nft.name}
+                className="w-full h-full object-cover"
               />
             </div>
 
-            {/* CONTENT */}
-            <div className="p-5">
-              <h2 className="text-2xl font-bold">
-                {nft.title}
+            <div className="p-6">
+              <h2 className="text-2xl font-bold mb-3">
+                {nft.name}
               </h2>
 
-              <p className="text-zinc-500 text-sm mt-3 leading-relaxed min-h-[48px]">
-                AI-generated collectible connected to merchant
-                identity and SocialFi growth.
+              <p className="text-zinc-400 text-sm mb-6">
+                {nft.description}
               </p>
 
-              <div className="flex items-center justify-between mt-6">
-                <span className="text-yellow-400 font-bold text-lg">
-                  {nft.price}
+              <div className="flex items-center justify-between">
+                <span className="text-yellow-400 font-bold">
+                  {nft.price} SOL
                 </span>
 
                 <button
-                  onClick={() => handleMint(nft.title)}
-                  className="bg-yellow-400 text-black px-4 py-2 rounded-xl text-sm font-bold hover:bg-yellow-300 transition duration-300 active:scale-95"
+                  onClick={() => handleMint(nft)}
+                  disabled={mintingId === nft.id}
+                  className="bg-yellow-400 hover:bg-yellow-300 disabled:bg-yellow-700 disabled:cursor-not-allowed text-black text-xs font-bold px-4 py-2 rounded-xl transition-all duration-300"
                 >
-                  Mint NFT
+                  {mintingId === nft.id
+                    ? "Minting..."
+                    : "Mint NFT"}
                 </button>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {mintedNFT && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4">
+          <div className="bg-zinc-950 border border-yellow-500 rounded-3xl p-8 w-full max-w-[420px] text-center shadow-2xl">
+            <div className="w-16 h-16 rounded-full bg-yellow-400/10 border border-yellow-400 flex items-center justify-center mx-auto mb-6">
+              <span className="text-yellow-400 text-3xl">
+                ✨
+              </span>
+            </div>
+
+            <h2 className="text-4xl font-black mb-4 leading-tight">
+              NFT Minted Successfully
+            </h2>
+
+            <p className="text-zinc-400 mb-6 leading-relaxed">
+              {mintedNFT} was successfully minted on
+              Solana Devnet.
+            </p>
+
+            <div className="bg-black border border-zinc-800 rounded-2xl p-4 mb-6 text-left">
+              <p className="text-xs text-zinc-500 mb-2">
+                Transaction
+              </p>
+
+              <p className="text-yellow-400 text-sm break-all">
+                {txHash}
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+              <a
+                href={`https://solscan.io/tx/${txHash}?cluster=devnet`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-2xl transition"
+              >
+                View on Solscan
+              </a>
+
+              <button
+                onClick={() => {
+                  setMintedNFT(null);
+                  setTxHash(null);
+                }}
+                className="flex-1 border border-zinc-700 hover:border-zinc-500 text-white font-bold py-3 rounded-2xl transition"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
