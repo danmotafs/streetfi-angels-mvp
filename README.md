@@ -1,6 +1,9 @@
 # StreetFi Angels
-
 ## Back real people. Onchain.
+
+## 🌐 Live Demo
+
+https://streetfi-angels-mvp.vercel.app
 
 StreetFi Angels is a SocialFi platform built on Solana that transforms informal merchants into investable digital identities through AI, NFTs, and community-driven support.
 
