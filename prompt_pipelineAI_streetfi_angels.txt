@@ -1,0 +1,57 @@
+a sessão apareceu, vamos fazer alguns ajustes antes de seguirmos.
+
+
+Estou incluindo ao MVP os seguintes arquivos
+
+áudios:
+sinos.mp4
+picole-picole.mp4
+oi-nois.mp4
+jingle-1.m4a
+jingle-2.m4a
+
+imagens:
+avatar-capa.png
+mockups.png
+post-1.png
+post-2.png
+post-3.png
+post-4.png
+post-5.png
+post-6.png
+post-7.png
+post-8.png
+post-9.png
+post-10.png
+post-11.png
+post-12.png
+post-13.png
+solana-logo.png
+Abaixo as alterações que quero fazer:
+
+STEP 01 - Merchant input
+- A foto da capa do merchant está cortada - centralize-a de modo que o rosto do Leo apareça
+- Botão merchant photos não está responsivo - conserte isso para um botão que ao clica-lo permite o upload dos arquivos
+- Botão voice sample - eu tenho 3 áudios gravados do Léo vendendo seus picolés:
+áudio "sinos" - sons de sinos badalando (é assim que, tradicionalmente) os vendedores de anunciam a sua chegada.
+áudio "oi-nois" - marca registrada do léo esse grito de "Ói Nóis" que o identifica e o diferencia dos outros vendedores de picolé
+áudio "picole-picole" - por meio desse grito que o léo avisa que o picolé chegou: "Picolé, Picolé!"
+Gostaria de subir esses áudios para o projeto, deixando-os disponíveis para os avaliadores clicarem e ouvirem, melhorando ainda mais a experiencia do usuário.
+- botão geolocalização. incluir botão clicável com o link do google maps da geolocalização do bairro Barbalho em Salvador. (https://maps.app.goo.gl/byCjnLUS4YvN2KSe7)
+- retirar botão behavior
+
+STEP 02 - AI Processing Layer
+- a capa deve ser a imagem "avatar-capa"
+- o botão avatar generation deve direcionar para um painel de avatares possíveis e nesse papel deve conter uma referência ao projeto de IA de geração de imagens dentro da Blockchain da Solana que tenha potencial para gerar esses avatares.
+- O botão jingle creation ao ser clicado, deve direcionar o usuário para a escolha de ouvir o "jingle-1" ou o "jingle-2".
+- O botão "social content" ao ser clicado deve direcionar o usuário para uma página que contenha as imagens "post-1" a "post-13", e logo abaixo a imagem "mockups", para que usuário enxergue o potencial da solução proposta.
+- retirar botão identify scoring
+
+STEP 03 - Solana Outputs
+
+- A capa deve ser a logomarca da Solana apenas - arquivo "solana-logo.png".
+- O botão NFT Collections ao ser clicado deve direcionar o usuário para uma página onde diversos NFTs gerados por IA estarão disponíveis para mint.
+- O botão Merchant profile ao ser clicado deve direcionar para uma página onde aparece o profile do Léo, com os seus NFTs disponíveis para mint.
+- O botão Support economy ao ser clicado deve direcionar o usuário para uma página onde contenha as inflrmações econômicas do léo, como o endereço (hash) da sua wallet. PIXBLOCK
+
+Me direcione da mesma forma que tem feito, dizendo onde devo criar e salvar os arquivos e pastas e que alterações devo fazer em quais códigos. Sempre me fornecendo de preferência o código completo.

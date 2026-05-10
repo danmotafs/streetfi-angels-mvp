@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 import Providers from "./providers";
+import AppWalletProvider from "../components/WalletProvider";
 
 export const metadata: Metadata = {
   title: "StreetFi Angels",
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          {children}
+          <AppWalletProvider>
+            {children}
+          </AppWalletProvider>
         </Providers>
       </body>
     </html>

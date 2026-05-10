@@ -1,366 +1,310 @@
 "use client";
 
-import { useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { mintMerchantNft } from "../../../lib/mintNFT";
-
-const avatarImages = [
-  "/images/leo-avatar-1.png",
-  "/images/leo-avatar-2.png",
-  "/images/leo-avatar-3.png",
-  "/images/leo-avatar-4.png",
-  "/images/leo-avatar-5.png",
-  "/images/leo-avatar-6.png",
-  "/images/leo-avatar-7.png",
-  "/images/leo-avatar-8.png",
-  "/images/leo-avatar-9.png",
-  "/images/leo-avatar-10.png",
-];
-
-const nftImages = [
-  "/images/NFT1.png",
-  "/images/NFT2.png",
-  "/images/NFT3.png",
-  "/images/NFT4.png",
-];
-
-const productImages = [
-  "/images/picole-sabor-amendoim-1.png",
-  "/images/picole-sabor-amendoim-2.png",
-  "/images/picole-sabor-caja-1.png",
-  "/images/picole-sabor-caja-2.png",
-  "/images/picole-sabor-chocolate-africano-1.png",
-  "/images/picole-sabor-chocolate-africano-2.png",
-  "/images/picole-sabor-coco-1.png",
-  "/images/picole-sabor-coco-2.png",
-  "/images/picole-sabor-doce-de-leite-1.png",
-  "/images/picole-sabor-leite-condensado-1.png",
-];
-
-const posts = [
-  {
-    image: "/images/picole-sabor-caja-1.png",
-    caption:
-      "Refreshing cajá popsicles made in Salvador. Real flavor from Bahia.",
-  },
-  {
-    image: "/images/picole-sabor-coco-1.png",
-    caption:
-      "Handmade coconut popsicles supporting local entrepreneurship.",
-  },
-  {
-    image: "/images/picole-sabor-amendoim-1.png",
-    caption:
-      "Traditional peanut popsicles inspired by Northeast Brazil.",
-  },
-  {
-    image: "/images/picole-sabor-limão-1.png",
-    caption:
-      "Fresh lemon flavor for hot Salvador afternoons.",
-  },
-  {
-    image: "/images/picole-sabor-manga-1.png",
-    caption:
-      "Tropical mango popsicles made with local ingredients.",
-  },
-  {
-    image: "/images/picole-sabor-tapioca-1.png",
-    caption:
-      "Brazilian tapioca-inspired frozen desserts from the streets.",
-  },
-  {
-    image: "/images/picole-sabor-umbu-1.png",
-    caption:
-      "Regional umbu fruit transformed into a frozen experience.",
-  },
-  {
-    image: "/images/picole-sabor-chocolate-africano-1.png",
-    caption:
-      "African chocolate inspired flavor celebrating Afro-Brazilian culture.",
-  },
-  {
-    image: "/images/picole-sabor-doce-de-leite-1.png",
-    caption:
-      "Classic Brazilian doce de leite popsicle made with love.",
-  },
-  {
-    image: "/images/picole-sabor-leite-condensado-1.png",
-    caption:
-      "Creamy condensed milk popsicles from Salvador’s streets.",
-  },
-];
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function MerchantProfile() {
-  const { wallet, connected } = useWallet();
-
-  const [minting, setMinting] = useState(false);
-
-  const handleMint = async () => {
-    try {
-      if (!wallet || !connected) {
-        alert("Connect Phantom Wallet first");
-        return;
-      }
-
-      setMinting(true);
-
-      const result = await mintMerchantNft(wallet.adapter);
-
-      if (result.success) {
-        alert("NFT Minted Successfully!");
-
-        window.open(
-          `https://explorer.solana.com/tx/${result.signature}?cluster=devnet`,
-          "_blank"
-        );
-      } else {
-        alert("Mint Failed");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong");
-    } finally {
-      setMinting(false);
-    }
-  };
+  const router = useRouter();
+  const id = "1";
 
   return (
-    <main className="min-h-screen bg-black px-6 py-12 text-white">
-      <div className="mx-auto max-w-7xl">
-        <a href="/" className="text-sm text-yellow-400">
-          ← Back to creation flow
-        </a>
+    <main
+      style={{
+        background: "#000",
+        minHeight: "100vh",
+        color: "white",
+        padding: "40px 24px",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <div style={{ width: "100%", maxWidth: "1400px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "40px",
+            flexWrap: "wrap",
+            gap: "16px",
+          }}
+        >
+          <button
+            onClick={() => router.back()}
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "#d4af37",
+              cursor: "pointer",
+              fontWeight: 600,
+              fontSize: "16px",
+            }}
+          >
+            ← Back
+          </button>
 
-        {/* HERO */}
-        <section className="mt-8 grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div className="overflow-hidden rounded-[36px] border border-yellow-500/20 bg-zinc-900">
+          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <button
+              onClick={() => router.push(`/merchant/${id}/support-economy`)}
+              style={topPrimaryButtonStyle}
+            >
+              Open Merchant Profile
+            </button>
+
+            <button
+              onClick={() =>
+                router.push(`/merchant/${id}/support-economy/nft-collections`)
+              }
+              style={topSecondaryButtonStyle}
+            >
+              Explore NFTs
+            </button>
+          </div>
+        </div>
+
+        <div style={{ marginBottom: "60px" }}>
+          <p
+            style={{
+              color: "#d4af37",
+              letterSpacing: "4px",
+              fontSize: "12px",
+              marginBottom: "16px",
+            }}
+          >
+            STREETFI AI INFRASTRUCTURE
+          </p>
+
+          <h1
+            style={{
+              fontSize: "84px",
+              fontWeight: 800,
+              lineHeight: 1,
+              marginBottom: "28px",
+            }}
+          >
+            StreetFi AI-Onchain Pipeline
+          </h1>
+
+          <p
+            style={{
+              color: "#bbb",
+              fontSize: "22px",
+              lineHeight: 1.8,
+              maxWidth: "900px",
+            }}
+          >
+            StreetFi Angels transforms real informal merchants into investable
+            digital identities through AI orchestration, NFT generation and
+            Solana infrastructure.
+          </p>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "24px",
+          }}
+        >
+          <div style={cardStyle}>
             <img
-              src="/images/leo-real.png"
-              alt="Léo do Picolé"
-              className="h-[680px] w-full object-contain bg-black"
+              src="/images/leo-real-01.png"
+              alt="Merchant"
+              style={{
+                width: "100%",
+                height: "230px",
+                objectFit: "cover",
+                objectPosition: "center center",
+              }}
             />
-          </div>
 
-          <div>
-            <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
-              Generated Merchant Profile
-            </p>
+            <div style={{ padding: "24px" }}>
+              <p style={stepLabelStyle}>STEP 01</p>
+              <h2 style={stepTitleStyle}>Merchant Input</h2>
 
-            <h1 className="mt-4 text-6xl font-black">
-              Léo do Picolé
-            </h1>
+              <div style={buttonGroupStyle}>
+                <button
+                  onClick={() => router.push(`/merchant/${id}/merchant-photos`)}
+                  style={buttonStyle}
+                >
+                  Merchant photos
+                </button>
 
-            <p className="mt-4 text-xl text-yellow-300">
-              Main activity area: Barbalho — Salvador / BA
-            </p>
+                <button
+                  onClick={() => router.push(`/merchant/${id}/voice-samples`)}
+                  style={buttonStyle}
+                >
+                  Voice samples
+                </button>
 
-            <p className="mt-6 text-lg leading-relaxed text-zinc-300">
-              Léo sells handmade popsicles in the streets of Salvador and
-              supports his family through local informal entrepreneurship.
-              StreetFi Angels transforms his real-world story into a digital
-              identity powered by AI and Solana.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <button className="rounded-2xl bg-yellow-400 px-8 py-4 font-black text-black">
-                Support Merchant
-              </button>
-
-              <button
-                onClick={handleMint}
-                disabled={minting}
-                className="rounded-2xl border border-yellow-400/30 px-8 py-4 font-black text-yellow-300 hover:bg-yellow-400 hover:text-black transition-all"
-              >
-                {minting ? "Minting NFT..." : "Mint NFT"}
-              </button>
-            </div>
-
-            <div className="mt-10 grid gap-4 md:grid-cols-4">
-              <div className="rounded-3xl bg-zinc-900 p-5">
-                <p className="text-sm text-zinc-500">
-                  Supporters
-                </p>
-
-                <p className="text-4xl font-black text-yellow-400">
-                  124
-                </p>
-              </div>
-
-              <div className="rounded-3xl bg-zinc-900 p-5">
-                <p className="text-sm text-zinc-500">
-                  City
-                </p>
-
-                <p className="text-2xl font-black">
-                  Salvador
-                </p>
-              </div>
-
-              <div className="rounded-3xl bg-zinc-900 p-5">
-                <p className="text-sm text-zinc-500">
-                  Neighborhood
-                </p>
-
-                <p className="text-2xl font-black">
-                  Barbalho
-                </p>
-              </div>
-
-              <div className="rounded-3xl bg-zinc-900 p-5">
-                <p className="text-sm text-zinc-500">
-                  Category
-                </p>
-
-                <p className="text-2xl font-black leading-tight">
-                  Popsicle Vendor
-                </p>
+                <button
+                  onClick={() => router.push(`/merchant/${id}/geolocation`)}
+                  style={buttonStyle}
+                >
+                  Geolocation
+                </button>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* AI AVATARS */}
-        <section className="mt-24">
-          <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
-            AI Avatar Generation
-          </p>
+          <div style={cardStyle}>
+            <img
+              src="/images/avatar-capa.png"
+              alt="AI Processing"
+              style={{
+                width: "100%",
+                height: "230px",
+                objectFit: "contain",
+                objectPosition: "center center",
+                background: "#d8a63a",
+                padding: "10px",
+              }}
+            />
 
-          <h2 className="mt-4 text-5xl font-black">
-            AI-generated merchant identities
-          </h2>
+            <div style={{ padding: "24px" }}>
+              <p style={stepLabelStyle}>STEP 02</p>
 
-          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-5">
-            {avatarImages.map((image, index) => (
-              <div
-                key={image}
-                className="overflow-hidden rounded-[28px] border border-yellow-500/20 bg-zinc-900"
-              >
-                <img
-                  src={image}
-                  className="h-72 w-full object-cover"
-                />
+              <h2 style={stepTitleStyle}>
+                AI Processing
+                <br />
+                Layer
+              </h2>
 
-                <div className="p-5">
-                  <p className="text-lg font-black text-yellow-400">
-                    Avatar #{index + 1}
-                  </p>
-                </div>
+              <div style={buttonGroupStyle}>
+                <button
+                  onClick={() =>
+                    router.push(`/merchant/${id}/avatar-generation`)
+                  }
+                  style={buttonStyle}
+                >
+                  Avatar generation
+                </button>
+
+                <button
+                  onClick={() => router.push(`/merchant/${id}/jingles`)}
+                  style={buttonStyle}
+                >
+                  Jingle creation
+                </button>
+
+                <button
+                  onClick={() => router.push(`/merchant/${id}/social-content`)}
+                  style={buttonStyle}
+                >
+                  Social content
+                </button>
               </div>
-            ))}
+            </div>
           </div>
-        </section>
 
-        {/* NFTS */}
-        <section className="mt-24">
-          <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
-            AI NFT Collection
-          </p>
+          <div style={cardStyle}>
+            <img
+              src="/images/solana-logo.png"
+              alt="Solana"
+              style={{
+                width: "100%",
+                height: "230px",
+                objectFit: "cover",
+              }}
+            />
 
-          <h2 className="mt-4 text-5xl font-black">
-            Product-based NFTs
-          </h2>
+            <div style={{ padding: "24px" }}>
+              <p style={stepLabelStyle}>STEP 03</p>
+              <h2 style={stepTitleStyle}>Solana Outputs</h2>
 
-          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {nftImages.map((image, index) => (
-              <div
-                key={image}
-                className="overflow-hidden rounded-[28px] border border-yellow-500/20 bg-zinc-900"
-              >
-                <img
-                  src={image}
-                  className="h-80 w-full object-cover"
-                />
+              <div style={buttonGroupStyle}>
+                <button
+                  onClick={() =>
+                    router.push(
+                      `/merchant/${id}/support-economy/nft-collections`
+                    )
+                  }
+                  style={buttonStyle}
+                >
+                  NFT Collections
+                </button>
 
-                <div className="p-5">
-                  <p className="text-xl font-black text-yellow-400">
-                    NFT #{index + 1}
-                  </p>
-                </div>
+                <button
+                  onClick={() =>
+                    router.push(
+                      `/merchant/${id}/support-economy/merchant-finance-profile`
+                    )
+                  }
+                  style={buttonStyle}
+                >
+                  Merchant Finance Profile
+                </button>
+
+                <button
+                  onClick={() => router.push(`/merchant/${id}/support-economy`)}
+                  style={buttonStyle}
+                >
+                  Support economy
+                </button>
               </div>
-            ))}
+            </div>
           </div>
-        </section>
-
-        {/* PRODUCTS */}
-        <section className="mt-24">
-          <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
-            Merchant Products
-          </p>
-
-          <h2 className="mt-4 text-5xl font-black">
-            Product image dataset
-          </h2>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3 lg:grid-cols-5">
-            {productImages.map((image) => (
-              <div
-                key={image}
-                className="overflow-hidden rounded-[24px] border border-white/10 bg-zinc-900"
-              >
-                <img
-                  src={image}
-                  className="h-48 w-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* SLOGAN */}
-        <section className="mt-24 rounded-[36px] border border-yellow-500/20 bg-zinc-950 p-8">
-          <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
-            AI Instagram Bio
-          </p>
-
-          <h2 className="mt-4 text-4xl font-black">
-            “Frozen flavor from Salvador. Real hustle. Real people. Now onchain.”
-          </h2>
-
-          <p className="mt-6 text-zinc-400">
-            Suggested Bio: 🍦 Handmade popsicles from Barbalho • Salvador/BA •
-            Powered by StreetFi Angels • Local flavor on Solana.
-          </p>
-        </section>
-
-        {/* SOCIAL POSTS */}
-        <section className="mt-24">
-          <p className="text-sm uppercase tracking-[0.4em] text-yellow-400">
-            AI Social Media Pack
-          </p>
-
-          <h2 className="mt-4 text-5xl font-black">
-            Ready-to-post Instagram content
-          </h2>
-
-          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post, index) => (
-              <div
-                key={index}
-                className="overflow-hidden rounded-[32px] border border-white/10 bg-zinc-900"
-              >
-                <img
-                  src={post.image}
-                  className="h-72 w-full object-cover"
-                />
-
-                <div className="p-6">
-                  <p className="text-sm text-yellow-400">
-                    Post #{index + 1}
-                  </p>
-
-                  <p className="mt-3 leading-relaxed text-zinc-300">
-                    {post.caption}
-                  </p>
-
-                  <p className="mt-4 text-sm text-zinc-500">
-                    #StreetFiAngels #Solana #SocialFi #Salvador #Bahia #Picolé #LocalEconomy
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        </div>
       </div>
     </main>
   );
 }
+
+const cardStyle = {
+  background: "#050505",
+  borderRadius: "28px",
+  overflow: "hidden",
+  border: "1px solid rgba(212,175,55,0.2)",
+};
+
+const stepLabelStyle = {
+  color: "#d4af37",
+  letterSpacing: "3px",
+  fontSize: "11px",
+  marginBottom: "18px",
+};
+
+const stepTitleStyle = {
+  fontSize: "56px",
+  lineHeight: 1.1,
+  marginBottom: "24px",
+};
+
+const buttonGroupStyle = {
+  display: "flex",
+  flexDirection: "column" as const,
+  gap: "16px",
+};
+
+const buttonStyle = {
+  background: "#0b0b0b",
+  border: "1px solid rgba(255,255,255,0.12)",
+  color: "white",
+  padding: "18px 20px",
+  borderRadius: "14px",
+  cursor: "pointer",
+  fontWeight: 700,
+  fontSize: "15px",
+};
+
+const topPrimaryButtonStyle = {
+  background: "#d4af37",
+  color: "#000",
+  border: "none",
+  padding: "14px 24px",
+  borderRadius: "12px",
+  cursor: "pointer",
+  fontWeight: 700,
+  fontSize: "15px",
+};
+
+const topSecondaryButtonStyle = {
+  background: "transparent",
+  color: "#fff",
+  border: "1px solid rgba(255,255,255,0.2)",
+  padding: "14px 24px",
+  borderRadius: "12px",
+  cursor: "pointer",
+  fontWeight: 700,
+  fontSize: "15px",
+};
