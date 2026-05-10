@@ -1,123 +1,271 @@
 # StreetFi Angels
 
-StreetFi Angels is a SocialFi platform that enables anyone to support and invest in the local informal economy by transforming real-world merchants into investable digital profiles.
+## Back real people. Onchain.
+
+StreetFi Angels is a SocialFi platform built on Solana that transforms informal merchants into investable digital identities through AI, NFTs, and community-driven support.
+
+The project connects Web3 technology with real-world local economies, enabling anyone to support street vendors, micro-entrepreneurs, and informal workers through transparent onchain interactions.
 
 ---
 
-## 🌍 Overview
+# 🌍 Vision
 
-StreetFi Angels transforms real-world informal merchants into investable digital identities, enabling global users to support and participate in local economies.
+Millions of informal merchants operate outside the digital economy.
 
-Users capture:
-- Photos
-- Audio
-- Personality traits
+They often lack:
 
-These inputs are converted into:
+- Digital identity
+- Access to capital
+- Online visibility
+- Customer retention tools
+- Financial infrastructure
+
+StreetFi Angels transforms these real-world merchants into digital SocialFi profiles powered by AI-generated content and Solana infrastructure.
+
+Our mission is simple:
+
+> Tokenizing Brazil’s informal economy.
+
+---
+
+# 🚀 The Concept
+
+A tourist walking through a Brazilian neighborhood discovers a charismatic street vendor.
+
+Instead of simply making a purchase, the user can now:
+
+- Support the merchant
+- Mint NFTs connected to their story
+- Engage with AI-generated content
+- Follow their digital identity
+- Become a real-world “angel investor”
+
+Each merchant becomes a living digital profile with:
+
 - AI-generated avatars
+- NFT collections
+- Voice samples
 - Jingles
-- Tokenized representations for onchain interaction
-
-Each merchant becomes a unique digital profile that can receive transparent and flexible support from a global community.
-
----
-
-## 🎯 Who is it for?
-
-- Informal merchants seeking visibility and financial opportunity  
-- Tourists and locals who want to support real people  
-- Impact-driven individuals interested in SocialFi  
-- Web3 users looking for real-world use cases  
+- Social media content
+- Geolocation storytelling
+- Community-driven support systems
 
 ---
 
-## ⚡ Why now?
+# 🧠 AI Infrastructure
 
-The informal economy represents a massive untapped market.
+StreetFi Angels uses AI-generated media to transform informal merchants into scalable digital identities.
 
-- In Brazil alone, the informality rate reached **37.3% in early 2026**, totaling **38.1 million workers**
-- These individuals have:
-  - Limited digital presence  
-  - Restricted access to capital  
-  - Few tools for growth  
+## Current AI Modules
 
-At the same time, Web3 is still searching for meaningful real-world applications.
+### 🎨 Avatar Generation
+Transforms merchants into stylized digital personas.
 
-StreetFi Angels bridges this gap by combining:
-- Social impact  
-- Local economies  
-- Blockchain technology  
+### 🎵 Jingle Generation
+Creates audio branding and identity sounds.
 
-Advancements in mobile technology, AI-generated content, and scalable infrastructure like Solana now make this possible.
+### 🎙 Voice Samples
+Preserves merchant voice and personality.
+
+### 📱 Social Content Generation
+Automated Instagram-style content production.
+
+### 📖 Storytelling Layer
+Creates emotional narratives around merchants and local culture.
 
 ---
 
-## 🛠 Tech Stack
+# ⚡ Why Solana?
 
-**Blockchain**
-- Solana (Devnet)
-- Future integration with Anchor programs
+StreetFi Angels was designed around Solana because of:
 
-**Frontend**
-- Next.js (TypeScript)
+- Ultra-low transaction fees
+- Fast confirmations
+- Scalable NFT infrastructure
+- Real-time interaction capabilities
+- Consumer-grade Web3 UX potential
+
+The platform explores how SocialFi can connect blockchain technology with real-world communities.
+
+---
+
+# 🖼 MVP Features
+
+## 🧑 Merchant Profile System
+Dynamic merchant pages with AI identity infrastructure.
+
+## 🪙 NFT Collections
+AI-generated collectible NFTs connected to merchant identity and community support.
+
+## 👛 Solana Wallet Integration
+Phantom-compatible wallet connection using Solana Wallet Adapter.
+
+## 🌎 Geolocation Layer
+Local storytelling connected to neighborhoods and tourism.
+
+## 📸 Merchant Photo Collections
+Real and AI-generated imagery integrated into the experience.
+
+## 🎵 AI Jingles
+Audio branding experiments for merchants.
+
+## 📱 Automated Social Content
+Instagram-inspired AI-generated social media production.
+
+## 💛 Support Economy
+Community-driven support interface connected to SocialFi concepts.
+
+---
+
+# 🛣 User Journey
+
+## 1. Merchant Discovery
+Users discover informal merchants in real-world environments.
+
+## 2. Digital Identity Creation
+AI transforms merchants into digital personas.
+
+## 3. NFT Infrastructure
+Exclusive collectible NFTs are generated around the merchant identity.
+
+## 4. Social Engagement
+Users interact through content, storytelling, and community participation.
+
+## 5. Onchain Support
+Supporters connect wallets and participate in the ecosystem.
+
+---
+
+# 🧩 Product Modules
+
+## Merchant Finance Profile
+Merchant onboarding and identity hub.
+
+## NFT Collections
+NFT gallery connected to merchant narratives.
+
+## AI Social Content
+Automated content generation for social media.
+
+## Voice Samples
+Audio identity infrastructure.
+
+## Jingles
+AI-generated merchant sound branding.
+
+## Merchant Photos
+Visual identity system.
+
+## Geolocation
+Neighborhood and tourism integration.
+
+## Support Economy
+Community support and participation layer.
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+- Next.js 15
+- TypeScript
 - Tailwind CSS
+
+## Blockchain
+- Solana Devnet
 - Solana Wallet Adapter
+- Metaplex ecosystem concepts
 
-**Backend (MVP)**
-- Node.js (lightweight)
-- Mocked data
+## AI & Media
+- AI-generated avatars
+- AI-generated storytelling
+- AI-generated social content
+- AI-generated jingles
 
-**AI Tools**
-- Avatar generation
-- Audio/jingle generation
-- Story creation
-
-**Deployment**
+## Deployment
 - Vercel
 
-**Version Control**
+## Version Control
 - GitHub
 
-## 📂 Project Structure
+---
 
+# 📂 Project Structure
+
+```plaintext
 streetfi-angels-mvp/
 │
-├── index.html # Project landing page
-├── styles.css # Basic styling
-├── script.js # MVP interactions
+├── app/
+│   ├── merchant/
+│   ├── support-economy/
+│   ├── social-content/
+│   ├── jingles/
+│   ├── geolocation/
+│   └── nft-collections/
 │
-├── /data # MVP database
-│ └── merchants.json
+├── components/
+├── data/
+├── lib/
+├── public/
+│   ├── images/
+│   └── audio/
 │
-├── /docs # Documentation
-│ └── project-overview.md
+├── README.md
+└── package.json
 
+🎯 Real-World Inspiration
 
----
+The MVP is inspired by real informal merchants from Brazilian neighborhoods, especially local street vendors operating in Salvador, Bahia.
 
-## 🚀 MVP Features
+The platform explores how technology, AI, and decentralized systems can generate visibility and opportunity for historically invisible economies.
 
-- Merchant profile creation (mocked)
-- Basic digital identity representation
-- Simple frontend interface
-- JSON-based database
+🌐 SocialFi Thesis
 
----
+StreetFi Angels explores a new category of SocialFi:
 
-## 🌐 Vision
+Real-world people as investable digital identities.
 
-StreetFi Angels connects Web3 technology with everyday life by making real-world people visible, investable, and supported through decentralized systems.
+Instead of speculative assets disconnected from reality, the platform proposes:
 
----
+Human-centered tokenization
+Local economy acceleration
+Tourism amplification
+Community-backed growth
+Transparent support systems
+📈 Future Roadmap
+Phase 1 — MVP
+Wallet integration
+NFT collections
+AI identity modules
+Phase 2 — Onchain Infrastructure
+SPL token systems
+Merchant reputation layers
+Community rewards
+Phase 3 — SocialFi Expansion
+Merchant onboarding at scale
+Tourism integrations
+Real-world merchant analytics
+AI-powered growth systems
+🔥 Hackathon Focus
 
-## 👤 Author
+This MVP was built to demonstrate how Solana infrastructure can power:
 
-Daniel Mota
----
+SocialFi
+Real-world commerce
+Informal economy inclusion
+AI-generated digital identity
+Community-driven participation
+👤 Author
+Daniel Mota Ferreira Silva
 
-## 🔗 GitHub Repository
+Data & Process Manager with experience in public-sector data intelligence, transparency systems, and technology-driven social impact initiatives.
+
+Currently building StreetFi Angels to connect AI, Web3, and local economies through scalable SocialFi infrastructure.
+
+🔗 Repository
 
 https://github.com/danmotafs/streetfi-angels-mvp
 
-## 📂 Project Structure
+💛 StreetFi Angels
 
+Back real people. Onchain.
