@@ -85,14 +85,23 @@ export default function TokenPage() {
       localStorage.setItem(receiptKey, JSON.stringify(pending)); setReceipt(pending); setPrepared(null);
       setStatus('Sending signed transaction and waiting for confirmation…');
       await umi.rpc.sendTransaction(signed);
-      const confirmation = await builder.confirm(umi, signed.signatures[0], { commitment: 'confirmed' });
-      if (confirmation.value.err) throw new Error(`Transaction failed: ${JSON.stringify(confirmation.value.err)}`);
+      // Confirm through HTTP polling; serverless RPC proxies do not expose WebSockets.
+      let confirmed = false;
+      for (let attempt = 0; attempt < 35; attempt++) {
+        const [state] = await umi.rpc.getSignatureStatuses([signed.signatures[0]], { searchTransactionHistory: true });
+        if (state?.error) throw new Error(`Transaction failed: ${JSON.stringify(state.error)}`);
+        if (state?.commitment === 'confirmed' || state?.commitment === 'finalized') { confirmed = true; break; }
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
+      if (!confirmed) throw new Error('Confirmation timed out. Use the saved receipt to verify; do not create another token.');
       await verify(pending);
     } catch (e) { setStatus(`${e instanceof Error ? e.message : String(e)}${pending ? ' A receipt was saved. Check its transaction before retrying.' : ''}`); }
     finally { lock.current = false; setBusy(false); }
   }
   async function verify(item: Receipt) {
     const umi = umiFor(item.network);
+    const [state] = await umi.rpc.getSignatureStatuses([base58.serialize(item.signature)], { searchTransactionHistory: true });
+    if (!state || state.error || !['confirmed', 'finalized'].includes(state.commitment || '')) throw new Error('Creation transaction is not confirmed successfully yet. Check its explorer link.');
     const mint = await fetchMint(umi, publicKey(item.mint));
     if (mint.decimals !== TOKEN_DECIMALS || mint.supply !== BigInt(item.supply) * BigInt(10 ** TOKEN_DECIMALS) || mint.freezeAuthority.__option !== 'None' || (item.fixed && mint.mintAuthority.__option !== 'None')) throw new Error('Mint state does not match the creation configuration.');
     const verified = { ...item, verified: true };
