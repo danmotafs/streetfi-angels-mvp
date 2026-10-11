@@ -46,7 +46,7 @@ export default function TokenPage() {
       setStatus('Checking network, metadata and available balance…');
       const umi = umiFor(network);
       const genesis = await umi.rpc.getGenesisHash();
-      const expected = network === 'mainnet-beta' ? '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp' : 'EtWTRABZaYq6iMfeYKouRu166VU2xqa1';
+      const expected = network === 'mainnet-beta' ? '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d' : 'EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG';
       if (genesis !== expected) throw new Error('RPC network mismatch.');
       const metadata = await fetch('/metadata/angels.json', { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error('Token metadata is not available.'); return r.json(); });
       if (metadata.name !== TOKEN_NAME || metadata.symbol !== TOKEN_SYMBOL) throw new Error('Token metadata mismatch.');
