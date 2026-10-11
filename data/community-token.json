@@ -1,0 +1,14 @@
+{
+  "name": "StreetFi Angels",
+  "symbol": "ANGELS",
+  "network": "mainnet-beta",
+  "mint": "G3abJam1fgLP1JF8MoLmA43HSMdmboLYiepdPNMTjh3F",
+  "supply": "1000000",
+  "decimals": 6,
+  "mintAuthority": null,
+  "freezeAuthority": null,
+  "initialRecipient": "7EPg2cQBZXebAgiQDbkCNiyS9Jq7W63khhvHsT1iyGDC",
+  "verifiedDate": "2026-10-11",
+  "metadataMutable": true,
+  "utilityStatus": "Community rewards, redemption and merchant support flows remain under development."
+}

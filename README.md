@@ -273,35 +273,58 @@ https://github.com/danmotafs/streetfi-angels-mvp
 
 Back real people. Onchain.
 
-## Community token creation (2026-10-11 update)
+## ANGELS — live on Solana Mainnet
 
-`/token` provides a founder-wallet-only creation flow for an SPL fungible token
-with Metaplex metadata. It starts on Devnet and allows an explicit Mainnet
-selection. The suggested configuration is StreetFi Angels / ANGELS, 1,000,000
-tokens and six decimals. Supply is editable before signing.
+The StreetFi Angels community token was created and verified on Solana Mainnet
+on October 11, 2026.
 
-Before requesting a Phantom signature, the flow checks the network genesis hash
-and metadata, simulates the complete atomic transaction, and displays its estimated
-SOL debit. Freeze authority is removed. The founder chooses whether to revoke mint
-authority permanently; metadata stays editable. Initial supply goes to the founder.
+| Property | Verified value |
+| --- | --- |
+| Name / symbol | StreetFi Angels / ANGELS |
+| Mint | `G3abJam1fgLP1JF8MoLmA43HSMdmboLYiepdPNMTjh3F` |
+| Network | Solana Mainnet |
+| Total supply | 1,000,000 ANGELS |
+| Decimals | 6 |
+| Mint authority | Removed; no further issuance |
+| Freeze authority | Removed |
+| Initial recipient | Founder wallet `7EPg2cQBZXebAgiQDbkCNiyS9Jq7W63khhvHsT1iyGDC` |
+| Metadata | Editable by the founder |
 
-Signed transaction receipts are saved locally before broadcast to help recover
-from confirmation timeouts. The page verifies mint supply and authority state.
-A saved receipt is browser-local; preserve the mint address and explorer link.
-Do not declare a live token until a Mainnet mint is confirmed and verified.
+[Verify the mint on Solana Explorer](https://explorer.solana.com/address/G3abJam1fgLP1JF8MoLmA43HSMdmboLYiepdPNMTjh3F)
 
-The RPC route only forwards approved Solana methods to fixed upstream endpoints.
-Optional server environment variables `SOLANA_MAINNET_RPC_URL` and
-`SOLANA_DEVNET_RPC_URL` can configure a dedicated RPC service. No private wallet
-keys are stored on the server. The founder signs in Phantom.
+[Public token page](https://streetfi-angels-mvp.vercel.app/token)
 
-Community reward and redemption mechanics are planned, as are distribution and
-merchant support flows. Token creation does not establish liquidity, market value,
-equity ownership, or revenue rights.
+### Work added for this resubmission
 
-Validation: TypeScript and production build passed; supply bounds, authority
-revocation instruction encoding and atomic transaction size were checked. An
-unsigned Mainnet simulation passed (estimated debit 0.01629904 SOL at test time).
-No token was emitted or SOL spent by these checks. Devnet simulation initially
-returned AccountNotFound because the founder has no test SOL; onchain Devnet
-creation and the Phantom signing flow still require user validation.
+- Founder-signed SPL fungible token creation with Metaplex metadata.
+- Network verification and unsigned simulation before signing.
+- Atomic creation, initial issuance, and authority revocation.
+- Phantom signing, HTTP confirmation polling, and onchain mint verification.
+- Local receipt persistence to recover from confirmation timeouts.
+- Verified Mainnet token configuration committed in `data/community-token.json`.
+- Public token page and homepage link, with Mainnet recreation disabled.
+
+The full initial supply was minted to the founder. Distribution, community
+rewards, redemption, NFT minting and merchant support flows remain under
+development. Token issuance is not evidence of demand, market value, liquidity,
+equity rights, revenue rights, or a completed merchant pilot.
+
+### Technical implementation
+
+`/token` displays the official Mainnet mint publicly without requiring a wallet.
+Founder tools remain available for Devnet testing. The RPC route forwards only
+approved Solana methods to fixed upstream endpoints. Optional server variables
+`SOLANA_MAINNET_RPC_URL` and `SOLANA_DEVNET_RPC_URL` configure dedicated RPC
+services. No private wallet keys are stored on the server; signing occurs in Phantom.
+
+### Validation
+
+TypeScript and production builds passed. Supply limits, authority instruction
+encoding, atomic transaction size and the deployed RPC route were checked.
+Mainnet creation was signed by the founder and finalized successfully. Direct
+finalized RPC reads verified a supply of 1,000,000 tokens, six decimals, null mint
+and freeze authorities, and the initial supply in the founder wallet.
+
+The earlier unsigned simulation estimated a debit of 0.01629904 SOL; it was an
+estimate rather than a final accounting of the signed transaction. Devnet
+creation and community distribution remain separate testing milestones.

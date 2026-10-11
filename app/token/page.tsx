@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import liveToken from '../../data/community-token.json';
 import Link from 'next/link';
 import { useWallet } from '@solana/wallet-adapter-react';
 import dynamic from 'next/dynamic';
@@ -42,11 +43,12 @@ export default function TokenPage() {
     lock.current = true; setBusy(true); setPrepared(null);
     try {
       if (!founder) throw new Error('Connect the founder wallet shown below.');
+      if (network === 'mainnet-beta') throw new Error('The official ANGELS token already exists on Mainnet. Use the published mint address.');
       if (receipt?.network === network) throw new Error('A creation receipt already exists for this network. Verify it before attempting another creation.');
       setStatus('Checking network, metadata and available balance…');
       const umi = umiFor(network);
       const genesis = await umi.rpc.getGenesisHash();
-      const expected = network === 'mainnet-beta' ? '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d' : 'EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG';
+      const expected = 'EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG';
       if (genesis !== expected) throw new Error('RPC network mismatch.');
       const metadata = await fetch('/metadata/angels.json', { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error('Token metadata is not available.'); return r.json(); });
       if (metadata.name !== TOKEN_NAME || metadata.symbol !== TOKEN_SYMBOL) throw new Error('Token metadata mismatch.');
@@ -112,7 +114,18 @@ export default function TokenPage() {
     <div className="max-w-3xl mx-auto space-y-8">
       <Link href="/" className="text-amber-300">← StreetFi Angels</Link>
       <header><p className="text-amber-300 text-sm tracking-widest mb-3">COMMUNITY TOKEN • SOLANA</p><h1 className="text-4xl font-bold">StreetFi Angels / ANGELS</h1><p className="text-gray-300 mt-4">Create and verify the project's community token. Start on Devnet, then review a Mainnet transaction in your own wallet.</p></header>
-      <section className="border border-gray-700 rounded-2xl p-6 space-y-4">
+      <section className="border border-amber-300 rounded-2xl p-6 space-y-4">
+        <p className="text-amber-300 text-sm tracking-widest">LIVE ON SOLANA MAINNET</p>
+        <h2 className="text-2xl font-bold">ANGELS is live</h2>
+        <p>The official StreetFi Angels community token was verified on October 11, 2026. Anyone can inspect its mint without connecting a wallet.</p>
+        <dl className="grid grid-cols-2 gap-4 text-sm"><div><dt className="text-gray-400">Total supply</dt><dd>1,000,000 ANGELS</dd></div><div><dt className="text-gray-400">Decimals</dt><dd>6</dd></div><div><dt className="text-gray-400">Mint authority</dt><dd>Removed — fixed supply</dd></div><div><dt className="text-gray-400">Freeze authority</dt><dd>Removed</dd></div></dl>
+        <p className="break-all text-sm">Official mint: {liveToken.mint}</p>
+        <a className="inline-block bg-amber-300 text-black font-bold rounded-lg px-5 py-3" href={explorer(liveToken.mint, 'address', 'mainnet-beta')} target="_blank" rel="noreferrer">Verify token on Solana Explorer</a>
+        <p className="text-gray-400 text-sm">The full initial supply was minted to the founder wallet. Metadata remains editable. Community rewards, redemption and merchant support flows are still under development.</p>
+      </section>
+      <details className="border border-gray-700 rounded-2xl p-6">
+        <summary className="cursor-pointer text-amber-300 font-bold">Founder tools / Devnet testing</summary>
+      <section className="mt-6 space-y-4">
         <WalletButton />
         <p className="text-sm text-gray-400 break-all">Founder wallet: {FOUNDER_WALLET}</p>
         {wallet.connected && !founder && <p className="text-amber-300">This connected wallet cannot create the project token.</p>}
@@ -121,11 +134,12 @@ export default function TokenPage() {
         <p className="text-gray-400 text-sm">6 decimal places. The entire initial supply goes to the founder wallet. Allocation and reward distribution are not yet implemented.</p>
         <label className="flex gap-3 items-start"><input type="checkbox" disabled={busy} checked={fixed} onChange={e => setFixed(e.target.checked)} className="mt-1" /><span>Fix the supply permanently by removing the mint authority. This cannot be undone. If unchecked, the founder can issue more tokens.</span></label>
         <p className="text-sm text-gray-400">Freeze authority is removed. Metadata remains editable by the founder. Community rewards and redemption are planned; the token carries no equity or revenue rights.</p>
-        <button disabled={busy || !founder || receipt?.network === network} onClick={preview} className="bg-amber-300 text-black font-bold rounded-lg px-5 py-3 disabled:opacity-40">{busy ? 'Working…' : 'Simulate and review'}</button>
+        <button disabled={busy || !founder || network === 'mainnet-beta' || receipt?.network === network} onClick={preview} className="bg-amber-300 text-black font-bold rounded-lg px-5 py-3 disabled:opacity-40">{busy ? 'Working…' : 'Simulate and review'}</button>
       </section>
       {prepared && <section className="border border-amber-300 rounded-2xl p-6 space-y-4"><h2 className="text-xl font-bold">Review before signing</h2><dl className="space-y-2"><div>Network: <strong>{prepared.network}</strong></div><div>Token: {TOKEN_NAME} ({TOKEN_SYMBOL})</div><div>Supply: {Number(prepared.supply).toLocaleString('en-US')}</div><div>Supply policy: {prepared.fixed ? 'Permanently fixed' : 'Additional issuance allowed'}</div><div>Estimated debit: <strong>{prepared.cost.toFixed(6)} SOL</strong> (simulation; final cost may vary)</div><div className="break-all text-sm">Mint address: {prepared.mint.publicKey}</div><div className="break-all text-sm">Metadata: {TOKEN_URI}</div></dl><label className="flex gap-3"><input type="checkbox" checked={accepted} onChange={e => setAccepted(e.target.checked)} /><span>I reviewed this configuration and the irreversible supply setting.</span></label><button disabled={!accepted || busy} onClick={create} className="bg-amber-300 text-black font-bold rounded-lg px-5 py-3 disabled:opacity-40">Sign creation in Phantom</button></section>}
       <p role="status" aria-live="polite" className="text-amber-200 break-words">{status}</p>
       {receipt && <section className="border border-gray-700 rounded-2xl p-6 space-y-4"><h2 className="text-xl font-bold">{receipt.verified ? 'Verified mint' : 'Saved receipt — verification required'}</h2><p>Network: {receipt.network}</p><p className="break-all">Mint: <a className="text-amber-300 underline" href={explorer(receipt.mint, 'address', receipt.network)} target="_blank" rel="noreferrer">{receipt.mint}</a></p><a className="text-amber-300 underline" href={explorer(receipt.signature, 'tx', receipt.network)} target="_blank" rel="noreferrer">View creation transaction</a><div><button disabled={busy} className="border border-gray-600 rounded px-4 py-2" onClick={async () => { setBusy(true); try { await verify(receipt); } catch (e) { setStatus(String(e)); } finally { setBusy(false); } }}>Verify onchain state</button></div><p className="text-sm text-gray-400">This receipt is saved in this browser. Preserve the mint address and transaction link. A Devnet receipt does not constitute a live Mainnet token.</p></section>}
+      </details>
       <p className="text-gray-400 text-sm">Creating a token does not create a market price or liquidity. Support payments, reward logic and merchant pilots are separate milestones.</p>
     </div>
   </main>;
