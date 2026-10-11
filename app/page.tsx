@@ -94,6 +94,8 @@ export default function Home() {
             NFT ecosystems and transparent onchain economic opportunities.
           </p>
 
+          <Link href="/token" style={{ display: "inline-block", color: "#d4af37", marginBottom: "24px", marginRight: "24px", fontWeight: 700 }}>Community token →</Link>
+
           {/* START EXPERIENCE BUTTON */}
           <Link href="/merchant/1">
             <button

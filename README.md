@@ -272,3 +272,36 @@ https://github.com/danmotafs/streetfi-angels-mvp
 💛 StreetFi Angels
 
 Back real people. Onchain.
+
+## Community token creation (2026-10-11 update)
+
+`/token` provides a founder-wallet-only creation flow for an SPL fungible token
+with Metaplex metadata. It starts on Devnet and allows an explicit Mainnet
+selection. The suggested configuration is StreetFi Angels / ANGELS, 1,000,000
+tokens and six decimals. Supply is editable before signing.
+
+Before requesting a Phantom signature, the flow checks the network genesis hash
+and metadata, simulates the complete atomic transaction, and displays its estimated
+SOL debit. Freeze authority is removed. The founder chooses whether to revoke mint
+authority permanently; metadata stays editable. Initial supply goes to the founder.
+
+Signed transaction receipts are saved locally before broadcast to help recover
+from confirmation timeouts. The page verifies mint supply and authority state.
+A saved receipt is browser-local; preserve the mint address and explorer link.
+Do not declare a live token until a Mainnet mint is confirmed and verified.
+
+The RPC route only forwards approved Solana methods to fixed upstream endpoints.
+Optional server environment variables `SOLANA_MAINNET_RPC_URL` and
+`SOLANA_DEVNET_RPC_URL` can configure a dedicated RPC service. No private wallet
+keys are stored on the server. The founder signs in Phantom.
+
+Community reward and redemption mechanics are planned, as are distribution and
+merchant support flows. Token creation does not establish liquidity, market value,
+equity ownership, or revenue rights.
+
+Validation: TypeScript and production build passed; supply bounds, authority
+revocation instruction encoding and atomic transaction size were checked. An
+unsigned Mainnet simulation passed (estimated debit 0.01629904 SOL at test time).
+No token was emitted or SOL spent by these checks. Devnet simulation initially
+returned AccountNotFound because the founder has no test SOL; onchain Devnet
+creation and the Phantom signing flow still require user validation.
